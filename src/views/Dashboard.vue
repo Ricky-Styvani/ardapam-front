@@ -1,5 +1,7 @@
 <template>
+
     <div id="page-top">
+
         <div id="wrapper">
            <!-- Sidebar -->
         <ul class="navbar-nav bg-white sidebar shadow-sw  accordion" id="accordionSidebar">
@@ -41,20 +43,6 @@
                     <span>Pengaduan</span></a>
             </li>
 
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-user-friends"></i>
-                    <span>Users</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white collapse-inner rounded">
-                        <a class="collapse-item" href=""> User Blablabla</a>
-                    </div>
-                </div>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="pelanggan.html">
                     <i class="fas fa-user"></i>
@@ -65,6 +53,17 @@
                 <a class="nav-link" href="karyawan.html">
                     <i class="fas fa-user-tie"></i>
                     <span>Karyawan</span></a>
+            </li>
+            <li class="nav-item no-arrow">
+                <a class="nav-link">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Users</span>
+                
+                <b-dropdown variant="transparent" class="m-2">
+                    <b-dropdown-item href="#">User</b-dropdown-item>
+                    <b-dropdown-item href="#">Admin</b-dropdown-item>
+                </b-dropdown></a>
+                
             </li>
 
 
@@ -85,17 +84,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mohamad Pikri <i class="fas fa-sort-down"></i></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mohamad Pikri 
+                                    <b-dropdown variant="transparent" text="▼">
+                                    <b-dropdown-item href="#">Profile</b-dropdown-item>
+                                    <b-dropdown-item href="#">Logout</b-dropdown-item>
+                                </b-dropdown></span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="../assets/img/undraw_profile.svg">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
+                           
+                                
                         </li>
 
                     </ul>
@@ -113,23 +111,7 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
+                            
                         </div>
                     </div>
                 </div>
@@ -138,5 +120,6 @@
 
         </div>
     </div>
+    
     </div>
 </template>
