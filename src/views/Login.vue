@@ -22,11 +22,18 @@
                                             <input type="text" class="form-control form-control-user"
                                                 v-model="name" aria-describedby="emailHelp"
                                                 placeholder="Enter Your Name...">
+                                            <h6 class="text-danger mx-2 my-2">Passwordmu Salah Bambang!</h6>
                                         </div>
+                                        <!-- <div class="alert alert-danger rounded-pill p-1 text-center" role="alert"> -->
+
+                                        <!-- </div> -->
                                         <div class="form-group">
                                             <label for="">Password</label>
                                             <input type="password" class="form-control form-control-user"
                                                 v-model="password" placeholder="Password">
+                                        </div>
+                                        <div class="alert alert-danger rounded p-1 text-center" role="alert">
+                                            Passwordmu Salah Bambang!
                                         </div>
                                         <div class="form-group text-center">
                                         <button type="button" class="btn btn-primary" @click="login()">Masuk</button>
