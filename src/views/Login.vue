@@ -22,7 +22,6 @@
                                             <input type="text" class="form-control form-control-user"
                                                 v-model="name" aria-describedby="emailHelp"
                                                 placeholder="Enter Your Name...">
-                                            <h6 class="text-danger mx-2 my-2">Passwordmu Salah Bambang!</h6>
                                         </div>
                                         <!-- <div class="alert alert-danger rounded-pill p-1 text-center" role="alert"> -->
 
@@ -31,9 +30,8 @@
                                             <label for="">Password</label>
                                             <input type="password" class="form-control form-control-user"
                                                 v-model="password" placeholder="Password">
-                                        </div>
-                                        <div class="alert alert-danger rounded p-1 text-center" role="alert">
-                                            Passwordmu Salah Bambang!
+                                        <small v-if="error == 401" class="text-danger mx-2 my-2">Username / password salah!</small>
+                                        <small v-if="error == 402" class="text-danger mx-2 my-2">harap isi username / password dengan benar!</small>
                                         </div>
                                         <div class="form-group text-center">
                                         <button type="button" class="btn btn-primary" @click="login()">Masuk</button>
@@ -57,12 +55,14 @@ export default {
     data(){
         return{
             name:'',
-            password:''
+            password:'',
+            error:0
         }
     },
     methods:{
         login(){
-            axios.post('http://localhost:8000/api/login',{name:this.name,password:this.password})
+            this.error = 0
+            axios.post('http://localhost:8000/api/login',{custom_id:this.name,password:this.password})
             .then(res=>{
                 console.log(res)
             }).catch(err=>{
