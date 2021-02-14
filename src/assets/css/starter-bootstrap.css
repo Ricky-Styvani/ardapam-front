@@ -554,10 +554,17 @@ pre code {
   margin-left: auto;
 }
 
+@media (min-width: 320px){
+  .pikri{
+    margin-right: auto;
+  }
+}
 @media (min-width: 576px) {
+
   .container, .container-sm {
     max-width: 540px;
   }
+  
 }
 
 @media (min-width: 768px) {
@@ -576,6 +583,7 @@ pre code {
   .container, .container-sm, .container-md, .container-lg, .container-xl {
     max-width: 1140px;
   }
+  
 }
 
 .row {

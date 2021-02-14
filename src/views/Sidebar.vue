@@ -49,7 +49,8 @@
                     <i class="fas fa-user-friends"></i>
                     <span>Users</span>
                 
-                <b-dropdown variant="transparent" class="m-2">
+                <b-dropdown variant="transparent" >
+                    <div slot="button-content"></div>
                     <b-dropdown-item href="#">Petugas</b-dropdown-item>
                     <b-dropdown-item href="#">Karyawan</b-dropdown-item>
                 </b-dropdown></a>
