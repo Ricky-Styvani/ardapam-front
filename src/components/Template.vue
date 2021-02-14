@@ -9,7 +9,8 @@
             <div id="content">
 
                 <Navbar />
-                <router-view/>
+                
+              <router-view :key="$route.path"></router-view>
                 
             </div>
 
