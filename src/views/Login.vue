@@ -16,25 +16,22 @@
                                         <img src="../assets/account.svg" style="object-fit: contain; height:200px;width:200px;" class="px-2 py-2 mb-1 mx-1">
                                         <h4>Log in</h4>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" @submit.prevent="login()">
                                         <div class="form-group">
                                             <label for="">Username</label>
-                                            <input type="text" class="form-control form-control-user"
+                                            <input required type="text" class="form-control form-control-user"
                                                 v-model="name" aria-describedby="emailHelp"
                                                 placeholder="Enter Your Name...">
                                         </div>
-                                        <!-- <div class="alert alert-danger rounded-pill p-1 text-center" role="alert"> -->
-
-                                        <!-- </div> -->
                                         <div class="form-group">
                                             <label for="">Password</label>
-                                            <input type="password" class="form-control form-control-user"
+                                            <input required type="password" class="form-control form-control-user"
                                                 v-model="password" placeholder="Password">
                                         <small v-if="error == 401" class="text-danger mx-2 my-2">Username / password salah!</small>
                                         <small v-if="error == 402" class="text-danger mx-2 my-2">harap isi username / password dengan benar!</small>
                                         </div>
                                         <div class="form-group text-center">
-                                        <button type="button" class="btn btn-primary" @click="login()">Masuk</button>
+                                        <button type="submit" class="btn btn-primary">Masuk</button>
                                         </div>
                                     </form>
                                 </div>
@@ -46,7 +43,6 @@
             </div>
 
         </div>
-
     </div>
 </template>
 <script>
@@ -64,11 +60,12 @@ export default {
             this.error = 0
             axios.post('http://localhost:8000/api/login',{custom_id:this.name,password:this.password})
             .then(res=>{
-                console.log(res)
+                localStorage.setItem('token',res.data.token)
+                this.$store.commit('user',res.data)
             }).catch(err=>{
                 console.log({err})
             })
-        }
+        },
     }
 }
 </script>
