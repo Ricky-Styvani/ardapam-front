@@ -23,6 +23,8 @@ import Laporan from '../views/laporan/Laporan.vue'
 
 import Tagihan from '../views/tagihan/Index.vue'
 
+import Catat from '../views/petugas/Catat.vue'
+
 import Template from '../components/Template.vue'
 
 Vue.use(VueRouter)
@@ -51,6 +53,19 @@ const routes = [
         path: 'createinformasi',
         name: 'CreateInfromasi',
         component: CreateInfromasi
+      },
+    ]
+  },
+  {
+    path: '/home',
+    redirect: '/home/catat',
+    name: 'Home',
+    component: Template,
+    children: [
+      {
+        path: 'catat',
+        name: 'Catat',
+        component: Catat
       },
     ]
   },
