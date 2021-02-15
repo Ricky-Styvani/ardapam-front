@@ -35,62 +35,65 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table my-2 text-center">
-                                <thead class="thead-light" style="color: black;">
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Awal</th>
-                                    <th scope="col">Akhir</th>
-                                    <th scope="col">Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
+                            <div class="table-responsive">
+                                <table class="table my-2 text-center">
+                                    <thead class="thead-light" style="color: black;">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Awal</th>
+                                        <th scope="col">Akhir</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td><button class="btn btn-light rounded-pill">Masukan Awal</button></td>
+                                        <td><button class="btn btn-light rounded-pill">Masukan Akhir</button></td>
+                                        
+                                        <td>
+                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Klaim</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
                                     <td><button class="btn btn-light rounded-pill">Masukan Awal</button></td>
-                                    <td><button class="btn btn-light rounded-pill">Masukan Akhir</button></td>
-                                    
-                                    <td>
-                                       <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Klaim</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                   <td><button class="btn btn-light rounded-pill">Masukan Awal</button></td>
-                                    <td><button class="btn btn-light rounded-pill">Masukan Akhir</button></td>
-                                    
-                                    <td>
-                                       <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Klaim</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td><button class="btn btn-light rounded-pill">Masukan Awal</button></td>
-                                    <td><button class="btn btn-light rounded-pill">Masukan Akhir</button></td>
-                                    
-                                    <td>
-                                       <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Klaim</a>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <div class="d-flex ">
-                                  <div class="ml-auto mt-2">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
-                                      </nav>
-                                  </div>
-                              </div>
+                                        <td><button class="btn btn-light rounded-pill">Masukan Akhir</button></td>
+                                        
+                                        <td>
+                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Klaim</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td><button class="btn btn-light rounded-pill">Masukan Awal</button></td>
+                                        <td><button class="btn btn-light rounded-pill">Masukan Akhir</button></td>
+                                        
+                                        <td>
+                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Klaim</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                        <div class="text-center">
+                                    <div class="ml-4 mt-2">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
                         </div>
                     </div>
                 </div>
