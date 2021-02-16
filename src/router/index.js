@@ -1,7 +1,7 @@
 import Vue from 'vue'
-
+import axios from 'axios'
 import VueRouter from 'vue-router'
-
+import store from '../store'
 import Login from '../views/Login.vue'
 
 import Dashboard from '../views/Dashboard.vue'
@@ -28,6 +28,29 @@ import Catat from '../views/petugas/Catat.vue'
 import Template from '../components/Template.vue'
 
 Vue.use(VueRouter)
+const checktoken = (to,from,next) => {
+  if(window.localStorage.getItem('token') != null){
+    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+      store.commit('user',res.data)
+      console.log(res)
+      next()
+    }).catch(()=>{
+        next('/login')
+    })
+  }
+  else{
+    next('/login')
+  }
+}
+const checkexp = (to, from,next) =>{
+  let date = new Date();
+  let cnv = date.getTime()
+  if(store.state.user.exp <= cnv){
+    next('/login')
+  }else{
+    next()
+  }
+}
 
 const routes = [
   {
@@ -35,6 +58,8 @@ const routes = [
     redirect: '/home/dashboard',
     name: 'Home',
     component: Template,
+    beforeEnter:checktoken,
+    beforeRouteUpdate:checkexp,
     children: [
       {
         path: 'dashboard',
@@ -105,7 +130,7 @@ const routes = [
   },   
   {
     path: '/',
-    redirect: '/login',
+    redirect: '/home',
     name: 'Base',
     component: {
       render (c) { return c('router-view') }
@@ -114,6 +139,7 @@ const routes = [
       {
         path: 'login',
         name: 'Login',
+        beforeEnter: checktoken,
         component: Login
       },
     ]
