@@ -60,8 +60,9 @@ export default {
             this.error = 0
             axios.post('http://localhost:8000/api/login',{custom_id:this.name,password:this.password})
             .then(res=>{
-                localStorage.setItem('token',res.data.token)
+                window.localStorage.setItem('token',res.data.token)
                 this.$store.commit('user',res.data)
+                this.$router.push('/home')
             }).catch(err=>{
                 console.log({err})
             })
