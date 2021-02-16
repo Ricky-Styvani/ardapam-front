@@ -9,7 +9,7 @@
                                 <div slot="button-content"><img class="img-profile rounded-circle"
                             src="../assets/img/undraw_profile.svg"></div>
                             <b-dropdown-item href="#">Profile</b-dropdown-item>
-                            <b-dropdown-item href="#">Logout</b-dropdown-item>
+                            <b-dropdown-item @click="logout()">Logout</b-dropdown-item>
                         </b-dropdown></span>
                         
                     </a>
@@ -22,6 +22,7 @@
         </nav>
 </template>
 <script>
+import axios from 'axios'
 export default {
     data(){
         return{
@@ -30,6 +31,16 @@ export default {
     },
     mounted(){
         this.name = this.$store.state.user.data.name 
+    },
+    methods:{
+        logout(){
+            axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(()=>{
+            this.$store.commit('user',{})
+            this.$router.push('/login')
+            }).catch(()=>{
+            this.$router.push('/login')
+            })
+        }
     }
 }
 </script>

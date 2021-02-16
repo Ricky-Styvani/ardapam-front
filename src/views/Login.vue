@@ -52,18 +52,25 @@ export default {
         return{
             name:'',
             password:'',
-            error:0
+            error:0,
+            isLoading:false
         }
     },
     methods:{
         login(){
             this.error = 0
+            if(this.IsLoading == true){
+                return 
+            }
+            this.isLoading = true
             axios.post('http://localhost:8000/api/login',{custom_id:this.name,password:this.password})
             .then(res=>{
                 window.localStorage.setItem('token',res.data.token)
                 this.$store.commit('user',res.data)
+                this.isLoading = false
                 this.$router.push('/home')
             }).catch(err=>{
+                this.isLoading = false
                 console.log({err})
             })
         },

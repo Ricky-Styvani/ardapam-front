@@ -10,9 +10,9 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <router-link class="nav-link" to="/home/dashboard">
                     <i class="fas fa-home"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span></router-link>
             </li>
 
             <li class="nav-item">
@@ -51,8 +51,8 @@
                 
                 <b-dropdown variant="transparent" >
                     <div slot="button-content"></div>
-                    <b-dropdown-item href="#">Petugas</b-dropdown-item>
-                    <b-dropdown-item href="#">Karyawan</b-dropdown-item>
+                    <b-dropdown-item to="/home/createkaryawan">Petugas</b-dropdown-item>
+                    <b-dropdown-item to="/home/createpelanggan">Pelanggan</b-dropdown-item>
                 </b-dropdown></a>
                 
             </li>

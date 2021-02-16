@@ -39,7 +39,6 @@ const checktoken = (to,from,next) => {
   if(window.localStorage.getItem('token') != null){
     axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
       store.commit('user',res.data)
-      console.log(res)
       next()
     }).catch(()=>{
         next('/login')
@@ -182,7 +181,7 @@ const routes = [
       {
         path: 'login',
         name: 'Login',
-        beforeEnter: checktoken,
+        // beforeEnter: checktoken,
         component: Login
       },
     ]
