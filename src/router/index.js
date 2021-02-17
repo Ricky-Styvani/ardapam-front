@@ -60,9 +60,9 @@ const checkexp = (to, from,next) =>{
 
 const routes = [
   {
-    path: '/home',
-    redirect: '/home/dashboard',
-    name: 'Home',
+    path: '/admin',
+    redirect: '/admin/dashboard',
+    name: 'admin',
     component: Template,
     beforeEnter:checktoken,
     beforeRouteUpdate:checkexp,
@@ -172,7 +172,7 @@ const routes = [
   },   
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/login',
     name: 'Base',
     component: {
       render (c) { return c('router-view') }

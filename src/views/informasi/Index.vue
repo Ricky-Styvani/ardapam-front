@@ -18,39 +18,20 @@
                                   <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Judul</th>
-                                    <th scope="col">Level</th>
+                                    <th scope="col">Deskripsi</th>
+                                    <th scope="col">gambar</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
                                     <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
+                                    <td>ini judulnya</td>
+                                    <td>ini deskripsi</td>
+                                    <td><img src="/" alt=""></td>
                                     <td>
                                         <a href="" class="btn btn-danger btn-sm mx-1"><i class="fas fa-trash"></i></a>
                                         <a href="" class="btn btn-warning btn-sm mx-1"><i class="fas fa-edit"></i></a>
-                                        <a href="" class="btn btn-info btn-sm mx-1"><i class="fas fa-info"></i></a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>
-                                        <a href="" class="btn btn-danger btn-sm mx-1"><i class="fas fa-trash"></i></a>
-                                        <a href="" class="btn btn-warning btn-sm mx-1"><i class="fas fa-edit"></i></a>
-                                        <a href="" class="btn btn-info btn-sm mx-1"><i class="fas fa-info"></i></a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>
-                                        <a href="" class="btn btn-danger btn-sm mx-1"><i class="fas fa-trash"></i></a>
-                                        <a href="" class="btn btn-warning btn-sm mx-1"><i class="fas fa-edit"></i></a>
-                                        <a href="" class="btn btn-info btn-sm mx-1"><i class="fas fa-info"></i></a>
                                     </td>
                                   </tr>
                                 </tbody>

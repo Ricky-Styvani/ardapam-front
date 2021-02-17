@@ -10,9 +10,9 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item active">
-                <router-link class="nav-link" to="/home/dashboard">
+                <a class="nav-link" to="/admin/dashboard">
                     <i class="fas fa-home"></i>
-                    <span>Dashboard</span></router-link>
+                    <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item">
@@ -39,20 +39,14 @@
                     <span>Pengaduan</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="pelanggan.html">
-                    <i class="fas fa-user"></i>
-                    <span>Pelanggan</span></a>
-            </li>
-            <li class="nav-item no-arrow">
+            <li class="nav-item no-arrow" >
                 <a class="nav-link">
                     <i class="fas fa-user-friends"></i>
                     <span>Users</span>
                 
-                <b-dropdown variant="transparent" >
-                    <div slot="button-content"></div>
-                    <b-dropdown-item to="/home/createkaryawan">Petugas</b-dropdown-item>
-                    <b-dropdown-item to="/home/createpelanggan">Pelanggan</b-dropdown-item>
+                <b-dropdown variant="transparent" right> 
+                    <b-dropdown-item to="/admin/createkaryawan">Petugas</b-dropdown-item>
+                    <b-dropdown-item to="/admin/createpelanggan">Pelanggan</b-dropdown-item>
                 </b-dropdown></a>
                 
             </li>

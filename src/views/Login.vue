@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
 
             <div class="col-xl-5  col-md-4">
-
+              
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -14,6 +14,9 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <img src="../assets/account.svg" style="object-fit: contain; height:200px;width:200px;" class="px-2 py-2 mb-1 mx-1">
+                                         <div v-if="error == 401" class="alert alert-danger rounded-pill p-1 text-center" role="alert">
+                                    Username / password salah!
+                                        </div>
                                         <h4>Log in</h4>
                                     </div>
                                     <form class="user" @submit.prevent="login()">
@@ -27,7 +30,7 @@
                                             <label for="">Password</label>
                                             <input required type="password" class="form-control form-control-user"
                                                 v-model="password" placeholder="Password">
-                                        <small v-if="error == 401" class="text-danger mx-2 my-2">Username / password salah!</small>
+                                        <!-- <small v-if="error == 401" class="text-danger mx-2 my-2">Username / password salah!</small> -->
                                         <small v-if="error == 402" class="text-danger mx-2 my-2">harap isi username / password dengan benar!</small>
                                         </div>
                                         <div class="form-group text-center">
@@ -68,9 +71,10 @@ export default {
                 window.localStorage.setItem('token',res.data.token)
                 this.$store.commit('user',res.data)
                 this.isLoading = false
-                this.$router.push('/home')
+                this.$router.push('/admin')
             }).catch(err=>{
                 this.isLoading = false
+                this.error = err.response.status
                 console.log({err})
             })
         },
