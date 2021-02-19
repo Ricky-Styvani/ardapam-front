@@ -4,12 +4,23 @@
                         <!-- Card Header - Dropdown -->
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Laporan Pelanggan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Pengaduan Pelanggan</h6>
                             
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            
+                            <b-button v-b-modal.modal-1 class="btn btn-danger">Lapor</b-button>
+
+                            <b-modal id="modal-1" title="Lapor">
+                              <div class="form-group">
+                                <label for="">Topik</label>
+                                <input type="text" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Deskripsi</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                              </div>
+                            </b-modal>
                             <div class="table-responsive">
                                 <table class="table my-2">
                                 <thead class="thead-light" style="color: black;">

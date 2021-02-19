@@ -14,6 +14,7 @@
                         <!-- Card Body -->
                         <div class="card-body">
                             <a href="createkaryawan.html" class="btn btn-primary"><i class="fas fa-plus fa-sm"> Karyawan</i></a>
+                            <div class="table-responsive">
                             <table class="table my-2">
                                 <thead class="thead-light" style="color: black;">
                                   <tr>
@@ -54,6 +55,7 @@
                                   </tr>
                                 </tbody>
                               </table>
+                              </div>
                               <div class="d-flex ">
                                   <div class="ml-auto mt-2">
                                     <nav aria-label="Page navigation example">

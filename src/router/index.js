@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import axios from 'axios'
+// import axios from 'axios'
 import VueRouter from 'vue-router'
-import store from '../store'
+// import store from '../store'
 import Login from '../views/Login.vue'
 
 import Dashboard from '../views/Dashboard.vue'
@@ -19,11 +19,14 @@ import CreatePelanggan2nd from '../views/pelanggan/Create2nd.vue'
 import UpdatePelanggan from '../views/pelanggan/Update.vue'
 import Profilepelanggan from '../views/pelanggan/Profile.vue'
 import Tagihanpelanggan from '../views/pelanggan/Tagihan.vue'
+import Detailtagihanpelanggan from '../views/pelanggan/Detailtagihanpelanggan.vue'
 import Transaksipelanggan from '../views/pelanggan/Transaksi.vue'
 
 import DetailPengaduan from '../views/pengaduan/Detail.vue'
+import PengaduanPelanggan from '../views/pengaduan/PengaduanPelanggan.vue'
 
 import Laporan from '../views/laporan/Laporan.vue'
+import DetailLaporan from '../views/laporan/DetailLaporan.vue'
 
 import Tagihan from '../views/tagihan/Index.vue'
 
@@ -35,28 +38,28 @@ import Bayar from '../views/petugas/Bayar.vue'
 import Template from '../components/Template.vue'
 
 Vue.use(VueRouter)
-const checktoken = (to,from,next) => {
-  if(window.localStorage.getItem('token') != null){
-    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
-      store.commit('user',res.data)
-      next()
-    }).catch(()=>{
-        next('/login')
-    })
-  }
-  else{
-    next('/login')
-  }
-}
-const checkexp = (to, from,next) =>{
-  let date = new Date();
-  let cnv = date.getTime()
-  if(store.state.user.exp <= cnv){
-    next('/login')
-  }else{
-    next()
-  }
-}
+// const checktoken = (to,from,next) => {
+//   if(window.localStorage.getItem('token') != null){
+//     axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+//       store.commit('user',res.data)
+//       next()
+//     }).catch(()=>{
+//         next('/login')
+//     })
+//   }
+//   else{
+//     next('/login')
+//   }
+// }
+// const checkexp = (to, from,next) =>{
+//   let date = new Date();
+//   let cnv = date.getTime()
+//   if(store.state.user.exp <= cnv){
+//     next('/login')
+//   }else{
+//     next()
+//   }
+// }
 
 const routes = [
   {
@@ -64,8 +67,6 @@ const routes = [
     redirect: '/admin/dashboard',
     name: 'admin',
     component: Template,
-    beforeEnter:checktoken,
-    beforeRouteUpdate:checkexp,
     children: [
       {
         path: 'dashboard',
@@ -81,6 +82,16 @@ const routes = [
         path: 'tagihanpelanggan',
         name: 'Tagihanpelanggan',
         component: Tagihanpelanggan
+      },
+      {
+        path: 'detailtagihanpelanggan',
+        name: 'Detailtagihanpelanggan',
+        component: Detailtagihanpelanggan
+      },
+      {
+        path: 'pengaduanpelanggan',
+        name: 'PeangaduanPelanggan',
+        component: PengaduanPelanggan
       },
       {
         path: 'transaksipelanggan',
@@ -142,6 +153,11 @@ const routes = [
         path: 'laporan',
         name: 'Laporan',
         component: Laporan
+      },
+      {
+        path: 'detaillaporan',
+        name: 'DetailLaporan',
+        component: DetailLaporan
       },
       {
         path: 'createkaryawan',

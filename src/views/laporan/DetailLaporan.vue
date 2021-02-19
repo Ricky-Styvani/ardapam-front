@@ -12,29 +12,21 @@
                             <div class="row">
                             <form class="col-md-8">
                                 <div class="form-group">
-                                  <label >ID Pelanggan</label>
+                                  <label >Nama Pelanggan</label>
                                   <input type="text" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label >Nama</label>
+                                    <label >Topik Laporan</label>
                                     <input type="text" class="form-control" >
                                 </div>
-                                <div class="form-group ">
-                                    <label>RT</label>
-                                    <select class="form-control">
-                                        <option>RT 03</option>
-                                        <option>RT 04</option>
-                                        <option>RT 05</option>
-                                    </select>
-                                </div>
                                 <div class="form-group">
-                                    <label >No Telp</label>
-                                    <input type="number" class="form-control" >
+                                    <label >Deskripsi</label>
+                                    <textarea nrows="5" class="form-control"></textarea>
                                 </div>
                                 <div class="d-flex">
                                     <div class="ml-auto">
                                     <a href="" class="btn btn-secondary btn-md mt-2">Back</a>
-                                    <button type="submit" class="btn btn-primary btn-md mt-2 ml-2" >Create</button>
+                                    <button type="submit" class="btn btn-primary btn-md mt-2 ml-2 " >Create</button>
                                 </div>
                                 </div>
                               </form>
