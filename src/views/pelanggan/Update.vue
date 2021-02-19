@@ -5,7 +5,7 @@
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Form Pelanggan</h6>
-                            <a href="" class="mr-4"><i class="fas fa-trash "></i></a>
+                            <button @click="showAlert" class="mr-4"><i class="fas fa-trash "></i></button>
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
@@ -43,3 +43,45 @@
                     </div>
                 </div>
 </template>
+<script>
+export default {
+  methods: {
+    showAlert() {
+      // Use sweetalert2
+            this.$swal({
+
+              title: 'Are you sure?',
+
+              text: "You won't be able to revert this!",
+
+              type: 'warning',
+
+              showCancelButton: true,
+
+              confirmButtonColor: '#3085d6',
+
+              cancelButtonColor: '#d33',
+
+              confirmButtonText: 'Yes, delete it!'
+
+            }).then((result) => {
+
+              if (result.value) {
+
+                this.$swal(
+
+                  'Deleted!',
+
+                  'Your file has been deleted.',
+
+                  'success'
+
+                )
+
+              }
+
+            });
+    },
+  },
+};
+</script>
