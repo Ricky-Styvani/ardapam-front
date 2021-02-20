@@ -1,13 +1,14 @@
 import Vue from 'vue'
-// import axios from 'axios'
+import axios from 'axios'
 import VueRouter from 'vue-router'
-// import store from '../store'
+import store from '../store'
 import Login from '../views/Login.vue'
 
 import Dashboard from '../views/Dashboard.vue'
 
 import Informasi from '../views/informasi/Index.vue'
 import CreateInfromasi from '../views/informasi/Createinformasi.vue'
+import UpdateInfromasi from '../views/informasi/Update.vue'
 
 import Karyawan from '../views/karyawan/Index.vue'
 import CreateKaryawan from '../views/karyawan/Create.vue'
@@ -32,34 +33,34 @@ import Tagihan from '../views/tagihan/Index.vue'
 
 import Catat from '../views/petugas/Catat.vue'
 import Profilepetugas from '../views/petugas/Profile.vue'
-import Petugas from '../views/petugas/Index.vue'
+// import Petugas from '../views/petugas/Index.vue'
 import Bayar from '../views/petugas/Bayar.vue'
 
 import Template from '../components/Template.vue'
 
 Vue.use(VueRouter)
-// const checktoken = (to,from,next) => {
-//   if(window.localStorage.getItem('token') != null){
-//     axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
-//       store.commit('user',res.data)
-//       next()
-//     }).catch(()=>{
-//         next('/login')
-//     })
-//   }
-//   else{
-//     next('/login')
-//   }
-// }
-// const checkexp = (to, from,next) =>{
-//   let date = new Date();
-//   let cnv = date.getTime()
-//   if(store.state.user.exp <= cnv){
-//     next('/login')
-//   }else{
-//     next()
-//   }
-// }
+const checktoken = (to,from,next) => {
+  if(window.localStorage.getItem('token') != null){
+    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+      store.commit('user',res.data)
+      next()
+    }).catch(()=>{
+        next('/login')
+    })
+  }
+  else{
+    next('/login')
+  }
+}
+const checkexp = (to, from,next) =>{
+  let date = new Date();
+  let cnv = date.getTime()
+  if(store.state.user.exp <= cnv){
+    next('/login')
+  }else{
+    next()
+  }
+}
 
 const routes = [
   {
@@ -67,6 +68,8 @@ const routes = [
     redirect: '/admin/dashboard',
     name: 'admin',
     component: Template,
+    beforeEnter:checktoken,
+    beforeRouteUpdate:checkexp,
     children: [
       {
         path: 'dashboard',
@@ -77,6 +80,11 @@ const routes = [
         path: 'createinformasi',
         name: 'CreateInfromasi',
         component: CreateInfromasi
+      },
+      {
+        path: 'Updateinformasi/:id',
+        name: 'UpdateInfromasi',
+        component: UpdateInfromasi
       },
       {
         path: 'tagihanpelanggan',
@@ -124,13 +132,13 @@ const routes = [
         name: 'Bayar',
         component: Bayar
       },
+      // {
+      //   path: 'petugas',
+      //   name: 'Petugas',
+      //   component: Petugas
+      // },
       {
-        path: 'petugas',
-        name: 'Petugas',
-        component: Petugas
-      },
-      {
-        path: 'updatekaryawan',
+        path: 'updatepetugas/:id',
         name: 'Updatekaryawan',
         component: UpdateKaryawan
       },
@@ -140,7 +148,7 @@ const routes = [
         component: Pelanggan
       },
       {
-        path: 'updatepelanggan',
+        path: 'updatepelanggan/:id',
         name: 'Updatepelanggan',
         component: UpdatePelanggan
       },
@@ -160,7 +168,7 @@ const routes = [
         component: DetailLaporan
       },
       {
-        path: 'createkaryawan',
+        path: 'createpetugas',
         name: 'Createkaryawan',
         component: CreateKaryawan
       },
@@ -180,7 +188,7 @@ const routes = [
         component: CreatePelanggan
       },
       {
-        path: 'karyawan',
+        path: 'petugas',
         name: 'Karyawan',
         component: Karyawan
       },

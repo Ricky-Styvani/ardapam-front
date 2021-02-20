@@ -72,7 +72,7 @@
                                
                                 <div class="d-flex">
                                     <div class="ml-auto">
-                                    <a to="/home/dashboard" class="btn btn-secondary btn-md mt-2">Back</a>
+                                    <router-link to="/admin/pelanggan" class="btn btn-secondary btn-md mt-2">Back</router-link>
                                     <button type="submit" class="btn btn-primary btn-md  mx-2 mt-2" >Create</button>
                                 </div>
                                 </div>

@@ -18,7 +18,7 @@ export default new Vuex.Store({
   },
   mutations: {
     user(state,payload){
-      state.user.data = payload.user
+      state.user.data = payload.user[0]
       state.user.token = payload.token
       state.user.expired = payload.exp
     }

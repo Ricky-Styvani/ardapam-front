@@ -1,6 +1,10 @@
 <template>
       <div class="container">
-
+            <loading :active.sync="isLoading" 
+        :color="color"
+        :can-cancel="canCancel" 
+        :background-color="bgc"
+        :is-full-page="fullPage"></loading>
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -49,22 +53,30 @@
     </div>
 </template>
 <script>
+   // Import component
+    import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+    import 'vue-loading-overlay/dist/vue-loading.css';
 import axios from 'axios';
 export default {
+       components: {
+            Loading
+        },
     data(){
         return{
             name:'',
             password:'',
             error:0,
-            isLoading:false
+            isLoading:false,
+            fullPage:true,
+            canCancel:false,
+            bgc:'#BFBFBF',
+            color:'#007BFF',
         }
     },
     methods:{
         login(){
             this.error = 0
-            if(this.IsLoading == true){
-                return 
-            }
             this.isLoading = true
             axios.post('http://localhost:8000/api/login',{custom_id:this.name,password:this.password})
             .then(res=>{

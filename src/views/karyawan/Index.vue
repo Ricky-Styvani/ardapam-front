@@ -4,7 +4,7 @@
                         <!-- Card Header - Dropdown -->
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary"> Karyawan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"> Petugas</h6>
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
@@ -13,46 +13,29 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <a href="createkaryawan.html" class="btn btn-primary"><i class="fas fa-plus fa-sm"> Karyawan</i></a>
+                            <router-link to="/admin/createkaryawan" class="btn btn-primary"><i class="fas fa-plus fa-sm"> Petugas</i></router-link>
                             <div class="table-responsive">
                             <table class="table my-2">
                                 <thead class="thead-light" style="color: black;">
                                   <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">nama</th>
+                                    <th scope="col">Nama</th>
                                     <th scope="col">No Telp</th>
                                     <th scope="col">Level</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>08785463543</td>
-                                    <td>Manajer</td>
+                                  <tr v-for="(data,index) in karyawan" :key="index"> 
+                                    <th scope="row">{{index+=1}}</th>
+                                    <td>{{data.name}}</td>
+                                    <td>{{data.telephone}}</td>
+                                    <td>{{data.level.level}}</td>
                                     <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-edit fa-xs"> </i> Edit</a>
+                                        <router-link :to="'/admin/updatepetugas/'+data.id" class="btn btn-success btn-sm"><i class="fas fa-edit fa-xs"> </i> Edit</router-link>
                                     </td>
                                   </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>08785463543</td>
-                                    <td>Babu</td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-edit fa-xs"></i> Edit</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>08785463543</td>
-                                    <td>Asisten Manajer</td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-edit fa-xs"> </i> Edit</a>
-                                    </td>
-                                  </tr>
+                                 
                                 </tbody>
                               </table>
                               </div>
@@ -73,3 +56,24 @@
                     </div>
                 </div>
 </template>
+<script>
+import axios from 'axios'
+export default {
+  data(){
+    return{
+      karyawan:[]
+    }
+  },
+  mounted(){
+    this.getData()
+  },
+  methods:{
+    getData(){
+      axios.get('http://localhost:8000/api/getKaryawan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+      .then(res=>{
+        this.karyawan = res.data
+      }).catch(err=>{console.log({err})})
+    }
+  }
+}
+</script>

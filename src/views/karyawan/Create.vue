@@ -51,7 +51,7 @@
                              
                                 <div class="d-flex">
                                     <div class="ml-auto">
-                                    <a to="/home/dashboard" class="btn btn-secondary btn-md mt-2">Back</a>
+                                    <router-link to="/admin/petugas" class="btn btn-secondary btn-md mt-2">Back</router-link>
                                     <button type="submit" class="btn btn-primary btn-md  mx-2 mt-2" >Create</button>
                                 </div>
                                 </div>
@@ -77,9 +77,8 @@ export default {
             custom_id:null,
             name:null,
             password:null,
-            rt:1,
+            level:1,
             telephone:null,
-            token:null,
         },
         err:{
             custom_id:null

@@ -1,40 +1,42 @@
 <template>
     <div class="container-fluid">
                     <div class="card shadow mb-4 my-2 mx-3">
-                        <!-- Card Header - Dropdown -->
+                                <loading :active.sync="isLoading" 
+        :color="color"
+        :can-cancel="canCancel" 
+        :background-color="bgc"
+        :is-full-page="fullPage"></loading>
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Form Pelanggan</h6>
-                            <button @click="showAlert" class="mr-4"><i class="fas fa-trash "></i></button>
+                            <a @click.prevent="showAlert" href="" class="mr-4"><i class="fas fa-trash "></i></a>
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="row">
-                            <form class="col-md-8">
+                            <form class="col-md-8" @submit.prevent="submit()">
                                 <div class="form-group">
                                   <label >ID Pelanggan</label>
-                                  <input type="text" class="form-control" >
+                                  <input required type="text" class="form-control" v-model="form.custom_id">
                                 </div>
                                 <div class="form-group">
                                     <label >Nama</label>
-                                    <input type="text" class="form-control" >
+                                    <input required type="text" class="form-control" v-model="form.name">
                                 </div>
                                 <div class="form-group ">
-                                    <label>RT</label>
-                                    <select class="form-control">
-                                        <option>RT 03</option>
-                                        <option>RT 04</option>
-                                        <option>RT 05</option>
+                                    <label>Rt</label>
+                                    <select class="form-control" @change="getselected($event)">
+                                        <option v-for="n in 15" :selected="form.rt == n ? true : false" :key="n" :value="n">RT {{('0' + n).slice(-2)}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label >No Telp</label>
-                                    <input type="number" class="form-control" >
+                                    <input required type="number" class="form-control" v-model="form.telephone">
                                 </div>
                                 <div class="d-flex">
                                     <div class="ml-auto">
-                                    <a href="" class="btn btn-secondary btn-md mt-2">Back</a>
-                                    <button type="submit" class="btn btn-primary btn-md mt-2 ml-2" >Create</button>
+                                    <router-link to="/admin/pelanggan" class="btn btn-secondary btn-md mt-2">Back</router-link>
+                                    <button type="submit" class="btn btn-primary btn-md mt-2 ml-2" >Update</button>
                                 </div>
                                 </div>
                               </form>
@@ -44,44 +46,112 @@
                 </div>
 </template>
 <script>
+import axios from 'axios'
+    // Import component
+    import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+    import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
+  name:'updatepelanggan',
+  data(){
+    return{
+      form:{
+        custom_id:'',
+        name:'',
+        rt:'',
+        telephone:''
+      },
+      isLoading : false,
+      fullPage:true,
+        canCancel:false,
+        bgc:'#BFBFBF',
+        color:'#007BFF',
+    }
+  },
+  components: {
+            Loading
+        },
+  mounted(){
+      this.getData()
+    },
   methods: {
+    getselected(data){
+            this.form.rt = data.target.value
+        },
     showAlert() {
       // Use sweetalert2
-            this.$swal({
+            this.$swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+       axios.delete('http://localhost:8000/api/deleteuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+                 console.log(res.data)
+                 this.$swal.fire(
+      'Deleted!',
+      'Your data has been deleted.',
+      'success'
+    ).then((result) => {
+  if (result.isConfirmed) {
+    this.$router.push('/admin/pelanggan')
+  }})
 
-              title: 'Are you sure?',
+             }).catch(err=>{
+                 console.log({err})
+                 this.$swal.fire(
+      'Failed!',
+      'Failed to delete your data',
+      'error'
+    )
+             })
+    
+  }
+})
+      },
+    
+      getData(){
+        axios.get('http://localhost:8000/api/showuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+      .then(res=>{
+        this.form.name = res.data[0].name
+        this.form.custom_id = res.data[0].custom_id
+        this.form.rt = res.data[0].pelanggan.rt
+        this.form.telephone = res.data[0].telephone
+      }).catch(err=>{console.log({err})})
+      },
 
-              text: "You won't be able to revert this!",
+      submit(){
+            this.isLoading = true
+            axios.patch('http://localhost:8000/api/updateuser/'+this.$route.params.id,
+            {custom_id:this.form.custom_id,name:this.form.name,rt:this.form.rt,telephone:this.form.telephone}, 
+            {headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
+            .then(()=>{
+            this.isLoading = false
+              
+               this.$swal.fire(
+      'Updated!',
+      'Your data has been updated.',
+      'success'
+    )
+        //         this.isLoading = false
+            }).catch(err=>{
+            this.isLoading = false
+                console.log(err.response.data)
+                this.$swal.fire(
+      'Failed!',
+      'failed to update',
+      'error'
+    )
+            })
+        }
 
-              type: 'warning',
 
-              showCancelButton: true,
+    }
 
-              confirmButtonColor: '#3085d6',
+  }
 
-              cancelButtonColor: '#d33',
-
-              confirmButtonText: 'Yes, delete it!'
-
-            }).then((result) => {
-
-              if (result.value) {
-
-                this.$swal(
-
-                  'Deleted!',
-
-                  'Your file has been deleted.',
-
-                  'success'
-
-                )
-
-              }
-
-            });
-    },
-  },
-};
 </script>

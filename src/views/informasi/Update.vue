@@ -8,7 +8,7 @@
         :is-full-page="fullPage"></loading>
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Form petugas</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Update Informasi</h6>
                             <a @click.prevent="showAlert" href="" class="mr-4"><i class="fas fa-trash "></i></a>
                         </div>
                         <!-- Card Body -->
@@ -16,27 +16,21 @@
                             <div class="row">
                             <form class="col-md-8" @submit.prevent="submit()">
                                 <div class="form-group">
-                                  <label >ID petugas</label>
-                                  <input required type="text" class="form-control" v-model="form.custom_id">
+                                  <label >Judul</label>
+                                  <input required type="text" v-model="form.judul" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label >Nama</label>
-                                    <input required type="text" class="form-control" v-model="form.name">
+                                    <label for="exampleFormControlTextarea1">Deskripsi</label>
+                                    <textarea required class="form-control" v-model="form.deskripsi" id="exampleFormControlTextarea1" rows="5"></textarea>
                                 </div>
                                 <div class="form-group ">
-                                    <label>Level</label>
-                                    <select class="form-control" @change="getselected($event)">
-                                        <option v-for="level in levels" :selected="form.level == level.id ? true : false" :key="level.id" :value="level.id">{{level.level}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label >No Telp</label>
-                                    <input required type="number" class="form-control" v-model="form.telephone">
+                                    <label>Image</label>
+                                    <input  type="file" @change="imagehandle($event)" class="form-control-file" accept="image/*">
                                 </div>
                                 <div class="d-flex">
                                     <div class="ml-auto">
-                                    <router-link to="/admin/petugas" class="btn btn-secondary btn-md mt-2">Back</router-link>
-                                    <button type="submit" class="btn btn-primary btn-md mt-2 ml-2" >Update</button>
+                                    <router-link to="/admin/informasi" class="btn btn-secondary btn-md mt-2">Back</router-link>
+                                    <button type="submit" class="btn btn-primary btn-md mt-2 ml-2 mr-2" >Create</button>
                                 </div>
                                 </div>
                               </form>
@@ -52,16 +46,14 @@ import axios from 'axios'
     // Import stylesheet
     import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
-  name:'updatepetugas',
+  name:'updatepelanggan',
   data(){
     return{
       form:{
-        custom_id:'',
-        name:'',
-        level:'',
-        telephone:''
+        judul:'',
+        deskripsi:'',
+        gambar:null
       },
-      levels:[],
       isLoading : false,
       fullPage:true,
         canCancel:false,
@@ -74,18 +66,21 @@ export default {
         },
   mounted(){
       this.getData()
-        this.getLevel()
     },
-    methods:{
-        getLevel(){
-             axios.get('http://localhost:8000/api/level',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
-                 this.levels = res.data
-             }).catch(err=>{
-                 console.log({err})
-             })
-        },
-    getselected(data){
-            this.form.level = data.target.value
+  methods: {
+      imagehandle(event){
+            let file = event.target.files[0]
+            if(file.type=='image/jpeg' || file.type=='image/jpg'|| file.type=='image/png'){
+                let fileReader = new FileReader()
+                fileReader.readAsDataURL(file)
+                fileReader.onload = (e) =>{
+                    this.form.gambar = e.target.result 
+                }
+            }else{
+                alert('kop surat harus gambar!')
+                this.form.gambar = ''
+
+            }
         },
     showAlert() {
       // Use sweetalert2
@@ -99,7 +94,7 @@ export default {
   confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
   if (result.isConfirmed) {
-       axios.delete('http://localhost:8000/api/deleteuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+       axios.delete('http://localhost:8000/api/information/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
                  console.log(res.data)
                  this.$swal.fire(
       'Deleted!',
@@ -107,7 +102,7 @@ export default {
       'success'
     ).then((result) => {
   if (result.isConfirmed) {
-    this.$router.push('/admin/petugas')
+    this.$router.push('/admin/informasi')
   }})
 
              }).catch(err=>{
@@ -124,19 +119,17 @@ export default {
       },
     
       getData(){
-        axios.get('http://localhost:8000/api/showuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+        axios.get('http://localhost:8000/api/information/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
       .then(res=>{
-        this.form.name = res.data.name
-        this.form.custom_id = res.data.custom_id
-        this.form.level = res.data.level_id
-        this.form.telephone = res.data.telephone
+        this.form.judul = res.data.judul
+        this.form.deskripsi = res.data.deskripsi
       }).catch(err=>{console.log({err})})
       },
 
       submit(){
             this.isLoading = true
-            axios.patch('http://localhost:8000/api/updateuser/'+this.$route.params.id,
-            {custom_id:this.form.custom_id,name:this.form.name,level_id:this.form.level,telephone:this.form.telephone}, 
+            axios.patch('http://localhost:8000/api/information/'+this.$route.params.id,
+            {judul:this.form.judul,deskripsi:this.form.deskripsi,gambar:this.form.gambar}, 
             {headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
             .then(()=>{
             this.isLoading = false
