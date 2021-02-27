@@ -4,14 +4,14 @@
                         <!-- Card Header - Dropdown -->
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary"> Tagihan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Transaksi</h6>
                            
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                <router-link to="/pelanggan/tagihan" class="btn btn-secondary pin"> Cancel</router-link>
+                                <router-link to="/pelanggan/transaksi" class="btn btn-secondary pin"> Cancel</router-link>
                                 <a href="#" @click.prevent="print()" style="float:right;"><i class="pin fas fa-print fa-lg" style="color:black;"></i></a>
                                 </div>
                                 

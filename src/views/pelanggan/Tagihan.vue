@@ -26,56 +26,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>march/2021</td>
-                                        <td>429</td>
-                                        <td>$201</td>
-                                        
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>march/2021</td>
-                                        <td>429</td>
-                                        <td>$201</td>
-                                        
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>march/2021</td>
-                                        <td>429</td>
-                                        <td>$201</td>
-                                        
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>march/2021</td>
-                                        <td>429</td>
-                                        <td>$201</td>
-                                        
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>march/2021</td>
-                                        <td>429</td>
-                                        <td>$201</td>
-                                        
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
+                                    <tr v-for="(data,index) in data" :key="index">
+                                    <th scope="row">{{index+=1}}</th>
+                                    <td class="text-center">{{data.user.name}}</td>
+                                    <td class="text-center">{{data.total_meter}}</td>
+                                    <td class="text-center">{{data.total_bayar}}</td>
+                                    <td class="text-center">
+                                        <router-link :to="'/pelanggan/detail-tagihan/'+data.id" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
+                                    </td>
+                                  </tr>
                                     </tbody>
                                 </table>
                                 
@@ -97,3 +56,25 @@
                     </div>
                 </div>
 </template>
+<script>
+import axios from 'axios'
+export default {
+    data(){
+        return {
+            data:null,
+            id:this.$store.state.user.data.id
+        }
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        getData(){
+            axios.get(`http://localhost:8000/api/tagihan-pelanggan/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.data = res.data
+            }).catch(err=>{console.log({err})})
+        }
+    }
+}
+</script>

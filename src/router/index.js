@@ -21,6 +21,7 @@ import UpdatePelanggan from '../views/pelanggan/Update.vue'
 import Profilepelanggan from '../views/pelanggan/Profile.vue'
 import Tagihanpelanggan from '../views/pelanggan/Tagihan.vue'
 import Detailtagihanpelanggan from '../views/pelanggan/Detailtagihanpelanggan.vue'
+import Detailtransaksipelanggan from '../views/pelanggan/Detailtransaksipelanggan.vue'
 import Transaksipelanggan from '../views/pelanggan/Transaksi.vue'
 
 import DetailPengaduan from '../views/pengaduan/Detail.vue'
@@ -300,9 +301,14 @@ const routes = [
         component: Transaksipelanggan
       },
       {
-        path: 'detailtagihan',
+        path: 'detail-tagihan/:id',
         name: 'Detailtagihanpelanggan',
         component: Detailtagihanpelanggan
+      },
+      {
+        path: 'detail-transaksi/:id',
+        name: 'Detailtransaksipelanggan',
+        component: Detailtransaksipelanggan
       },
     ]}
 ]

@@ -30,7 +30,7 @@
                                     <td class="text-center">{{data.total_meter}}</td>
                                     <td class="text-center">{{data.total_bayar}}</td>
                                     <td class="text-center">
-                                        <router-link :to="'/admin/detail-laporan/'+data.id" @click="detail(data.id)" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
+                                        <router-link :to="'/admin/detail-laporan/'+data.id" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
                                     </td>
                                   </tr>
                                   

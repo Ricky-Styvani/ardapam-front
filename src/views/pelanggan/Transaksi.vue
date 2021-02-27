@@ -4,7 +4,7 @@
                         <!-- Card Header - Dropdown -->
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary"> Laporan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary"> Transaksi</h6>
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
@@ -13,75 +13,28 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div>
-                                        <label for="">Tahun</label>
-                                        <b-dropdown variant="transparent">
-                                            <div slot="button-content"></div>
-                                            <b-dropdown-item href="#">2021</b-dropdown-item>
-                                            <b-dropdown-item href="#">2022</b-dropdown-item>
-                                        </b-dropdown>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="table-responsive">
                                 <table class="table my-2 text-center">
                                     <thead class="thead-light" style="color: black;">
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Bulan/Tahun</th>
+                                        <th scope="col">Kubik</th>
                                         <th scope="col">Bayar</th>
-                                        <th scope="col">Keterangan</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>March/2020</td>
-                                        <td>$210</td>
-                                        <td>Lunas</td>
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr><tr>
-                                        <th scope="row">1</th>
-                                        <td>March/2020</td>
-                                        <td>$210</td>
-                                        <td>Lunas</td>
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>March/2020</td>
-                                        <td>$210</td>
-                                        <td>Lunas</td>
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>March/2020</td>
-                                        <td>$210</td>
-                                        <td>Lunas</td>
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>March/2020</td>
-                                        <td>$210</td>
-                                        <td>Lunas</td>
-                                        <td>
-                                        <a href="" class="btn btn-success rounded-pill btn-sm"><i class="fas fa-info"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    
+                                    <tr v-for="(data,index) in data" :key="index">
+                                    <th scope="row">{{index+=1}}</th>
+                                    <td class="text-center">{{data.user.name}}</td>
+                                    <td class="text-center">{{data.total_meter}}</td>
+                                    <td class="text-center">{{data.total_bayar}}</td>
+                                    <td class="text-center">
+                                        <router-link :to="'/pelanggan/detail-transaksi/'+data.id" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
+                                    </td>
+                                  </tr>
                                     </tbody>
                                 </table>
                                 
@@ -103,3 +56,25 @@
                     </div>
                 </div>
 </template>
+<script>
+import axios from 'axios'
+export default {
+    data(){
+        return {
+            data:null,
+            id:this.$store.state.user.data.id
+        }
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        getData(){
+            axios.get(`http://localhost:8000/api/transaksi-pelanggan/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.data = res.data
+            }).catch(err=>{console.log({err})})
+        }
+    }
+}
+</script>
