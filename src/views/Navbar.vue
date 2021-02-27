@@ -22,7 +22,6 @@
         </nav>
 </template>
 <script>
-import axios from 'axios'
 export default {
     data(){
         return{
@@ -34,12 +33,11 @@ export default {
     },
     methods:{
         logout(){
-            axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(()=>{
-            this.$store.commit('user',{})
+            
+            this.$store.commit('reset')
+            window.localStorage.removeItem('token')
             this.$router.push('/login')
-            }).catch(()=>{
-            this.$router.push('/login')
-            })
+  
         }
     }
 }

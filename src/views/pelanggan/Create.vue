@@ -25,7 +25,7 @@
                                         </div>
                                 <div class="form-group">
                                   <label >ID Pelanggan</label>
-                                  <input required v-model="form.custom_id" type="text" class="form-control" >
+                                  <input disabled :value="year+'88'+id" type="text" class="form-control" >
                                     <small v-if="err.custom_id !=null" class="text-danger">Id sudah dipakai</small>
                                 </div>
                                 <div class="form-group">
@@ -36,7 +36,7 @@
                                   
                                     <label for="password">Password</label>
                         <div class="d-flex">
-                        <input :type="passwordField" id="password" name="password" v-model="form.password" class="form-control" data-toggle="password">
+                        <input disabled :type="passwordField" id="password" name="password" :value="'Ardapam#'+id" class="form-control" data-toggle="password">
                         <button type= "button" class="btn btn-primary btn-sm" @click="showPassword"><v-icon :name="icon"></v-icon></button>
                         </div> 
                                 </div>
@@ -95,13 +95,12 @@ export default {
     data(){
         return{
         form:{
-            custom_id:null,
             name:null,
-            password:null,
             rt:1,
             telephone:null,
             token:null,
         },
+        id:'',
         err:{
             token:null,
             custom_id:null
@@ -115,9 +114,26 @@ export default {
         canCancel:false,
         bgc:'#BFBFBF',
         color:'#007BFF',
+        year:null
         }
     },
+        mounted(){
+        this.getId()
+        this.getyear()
+    },
     methods:{
+        getyear(){
+              var d = new Date();
+            var n = d.getFullYear();
+            this.year = n
+        },
+        getId(){
+             axios.get('http://localhost:8000/api/getuserid',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+                 this.id = res.data.id
+             }).catch(err=>{
+                 console.log({err})
+             })
+        },
         getselected(data){
             this.form.rt = data.target.value
         },
@@ -136,15 +152,19 @@ export default {
         register(){
             this.success = false
             this.failed = false
+            this.err.token = null
             if(this.IsLoading == true){
                 return 
             }
             this.isLoading = true
+            let custom_id = this.year+'88'+this.id
+            let password = 'Ardapam#'+this.id
             axios.post('http://localhost:8000/api/register',
-            {token:this.form.token,custom_id:this.form.custom_id,name:this.form.name,password:this.form.password,rt:this.form.rt,telephone:this.form.telephone}, 
+            {token:this.form.token,custom_id:custom_id,name:this.form.name,password:password,rt:this.form.rt,telephone:this.form.telephone}, 
             {headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 console.log(res.data)
+                this.getId()
                 this.success = true
                 this.form = {
             custom_id:null,

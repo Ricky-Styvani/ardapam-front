@@ -83,7 +83,14 @@ export default {
                 window.localStorage.setItem('token',res.data.token)
                 this.$store.commit('user',res.data)
                 this.isLoading = false
-                this.$router.push('/admin')
+                let level = this.$store.state.user.data.level.level
+      if(level == 'admin'){
+      this.$router.push('/admin/dashboard').catch(() => {});
+      }else if(level == 'petugas'){
+        this.$router.push('/petugas/dashboard').catch(() => {});
+      }else if(level == 'pelanggan'){
+        this.$router.push('/pelanggan/dashboard').catch(() => {});
+      }
             }).catch(err=>{
                 this.isLoading = false
                 this.error = err.response.status

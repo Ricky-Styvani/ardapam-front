@@ -17,7 +17,7 @@
                             <form class="col-md-8" @submit.prevent="submit()">
                                 <div class="form-group">
                                   <label >ID petugas</label>
-                                  <input required type="text" class="form-control" v-model="form.custom_id">
+                                  <input disabled type="text" class="form-control" :value="form.custom_id">
                                 </div>
                                 <div class="form-group">
                                     <label >Nama</label>

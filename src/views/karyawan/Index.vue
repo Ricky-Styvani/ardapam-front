@@ -13,9 +13,9 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <router-link to="/admin/createkaryawan" class="btn btn-primary"><i class="fas fa-plus fa-sm"> Petugas</i></router-link>
+                            <router-link to="/admin/createpetugas" class="btn btn-primary"><i class="fas fa-plus fa-sm"> Petugas</i></router-link>
                             <div class="table-responsive">
-                            <table class="table my-2">
+                            <table class="table table-bordered my-2">
                                 <thead class="thead-light" style="color: black;">
                                   <tr>
                                     <th scope="col">#</th>

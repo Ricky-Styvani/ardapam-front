@@ -16,15 +16,15 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="laporan.html">
+                 <router-link class="nav-link" to="/admin/laporan">
                     <i class="fas fa-chart-bar"></i>
-                    <span>Laporan</span></a>
+                    <span>Laporan</span></router-link>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="tagihan.html">
+                 <router-link class="nav-link" to="/admin/tagihan">
                     <i class="fas fa-calculator"></i>
-                    <span>Tagihan</span></a>
+                    <span>Tagihan</span></router-link>
             </li>
 
             <li class="nav-item">
@@ -34,9 +34,9 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="pengaduan.html">
+                 <router-link class="nav-link" to="/admin/pengaduan">
                     <i class="far fa-comment-dots"></i>
-                    <span>Pengaduan</span></a>
+                    <span>Pengaduan</span></router-link>
             </li>
 
             <li class="nav-item no-arrow" >

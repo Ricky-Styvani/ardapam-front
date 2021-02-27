@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <router-link to="/admin/createPelanggan" class="btn btn-primary"><i class="fas fa-plus fa-sm"> Pelanggan</i></router-link>
                             <div class="table-responsive">
-                            <table class="table my-2">
+                            <table class="table table-bordered my-2">
                                 <thead class="thead-light" style="color: black;">
                                   <tr>
                                     <th scope="col">#</th>

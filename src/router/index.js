@@ -37,13 +37,74 @@ import Profilepetugas from '../views/petugas/Profile.vue'
 import Bayar from '../views/petugas/Bayar.vue'
 
 import Template from '../components/Template.vue'
+import Templatepetugas from '../components/Templatepetugas.vue'
+import Templatepelanggan from '../components/Templatepelanggan.vue'
 
 Vue.use(VueRouter)
 const checktoken = (to,from,next) => {
   if(window.localStorage.getItem('token') != null){
     axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
       store.commit('user',res.data)
+      if(store.state.user.data.level.level == 'admin'){
       next()
+      }else{
+        next('/404')
+      }
+    }).catch(()=>{
+        next('/login')
+    })
+  }
+  else{
+    next('/login')
+  }
+}
+const checkpetugas = (to,from,next) => {
+  if(window.localStorage.getItem('token') != null){
+    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+      store.commit('user',res.data)
+      if(store.state.user.data.level.level == 'petugas'){
+      next()
+      }else{
+        next('/404')
+      }
+    }).catch(()=>{
+        next('/login')
+    })
+  }
+  else{
+    next('/login')
+  }
+}
+const checkpelanggan = (to,from,next) => {
+  if(window.localStorage.getItem('token') != null){
+    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+      store.commit('user',res.data)
+      if(store.state.user.data.level.level == 'pelanggan'){
+      next()
+      }else{
+        next('/404')
+      }
+    }).catch(()=>{
+        next('/login')
+    })
+  }
+  else{
+    next('/login')
+  }
+}
+const checkrole = (to,from,next) => {
+  if(window.localStorage.getItem('token') != null){
+    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+      store.commit('user',res.data)
+      if(store.state.user.data.level.level == 'admin'){
+      next('/admin')
+      }else if(store.state.user.data.level.level == 'petugas'){
+      next('/petugas')
+      }else if(store.state.user.data.level.level == 'pelanggan'){
+      next('/pelanggan')
+      }else{
+        next('/login')
+      }
     }).catch(()=>{
         next('/login')
     })
@@ -86,52 +147,26 @@ const routes = [
         name: 'UpdateInfromasi',
         component: UpdateInfromasi
       },
-      {
-        path: 'tagihanpelanggan',
-        name: 'Tagihanpelanggan',
-        component: Tagihanpelanggan
-      },
-      {
-        path: 'detailtagihanpelanggan',
-        name: 'Detailtagihanpelanggan',
-        component: Detailtagihanpelanggan
-      },
+   
       {
         path: 'pengaduanpelanggan',
         name: 'PeangaduanPelanggan',
         component: PengaduanPelanggan
       },
-      {
-        path: 'transaksipelanggan',
-        name: 'Transaksipelanggan',
-        component: Transaksipelanggan
-      },
-      {
-        path: 'profilepelanggan',
-        name: 'Profilepelanggan',
-        component: Profilepelanggan
-      },
+    
       
       {
         path: 'createpelanggan2nd',
         name: 'CreatePelanggan2nd',
         component: CreatePelanggan2nd
       },
-      {
-        path: 'catat',
-        name: 'Catat',
-        component: Catat
-      },
-      {
-        path: 'profilepetugas',
-        name: 'Profilepetugas',
-        component: Profilepetugas
-      },
-      {
-        path: 'bayar',
-        name: 'Bayar',
-        component: Bayar
-      },
+      // {
+      //   path: 'catat',
+      //   name: 'Catat',
+      //   component: Catat
+      // },
+    
+    
       // {
       //   path: 'petugas',
       //   name: 'Petugas',
@@ -163,7 +198,7 @@ const routes = [
         component: Laporan
       },
       {
-        path: 'detaillaporan',
+        path: 'detail-laporan/:id',
         name: 'DetailLaporan',
         component: DetailLaporan
       },
@@ -196,21 +231,80 @@ const routes = [
   },   
   {
     path: '/',
-    redirect: '/login',
     name: 'Base',
+    beforeEnter: checkrole,
     component: {
-      render (c) { return c('router-view') }
+      render () { return null }
     },
+  },
+  {
+        path: '/login',
+        name: 'Login',
+        component: Login
+  },
+  {
+    path: '/petugas',
+    redirect: '/petugas/dashboard',
+    name: 'petugas',
+    component: Templatepetugas,
+    beforeEnter:checkpetugas,
+    beforeRouteUpdate:checkexp,
     children: [
       {
-        path: 'login',
-        name: 'Login',
-        // beforeEnter: checktoken,
-        component: Login
+        path: 'dashboard',
+        name: 'Dashboard Petugas',
+        component: Dashboard
       },
-    ]
-  }
-  
+      {
+        path: 'catat',
+        name: 'Catat',
+        component: Catat
+      },
+      {
+        path: 'bayar',
+        name: 'Bayar',
+        component: Bayar
+      },
+      {
+        path: 'profile',
+        name: 'Profilepetugas',
+        component: Profilepetugas
+      },
+    ]},
+  {
+    path: '/pelanggan',
+    redirect: '/pelanggan/dashboard',
+    name: 'pelanggan',
+    component: Templatepelanggan,
+    beforeEnter:checkpelanggan,
+    beforeRouteUpdate:checkexp,
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard pelanggan',
+        component: Dashboard
+      },
+      {
+        path: 'profile',
+        name: 'Profilepelanggan',
+        component: Profilepelanggan
+      },
+      {
+        path: 'tagihan',
+        name: 'Tagihanpelanggan',
+        component: Tagihanpelanggan
+      },
+      {
+        path: 'transaksi',
+        name: 'Transaksipelanggan',
+        component: Transaksipelanggan
+      },
+      {
+        path: 'detailtagihan',
+        name: 'Detailtagihanpelanggan',
+        component: Detailtagihanpelanggan
+      },
+    ]}
 ]
 
 const router = new VueRouter({

@@ -23,7 +23,7 @@
                                         </div>
                                 <div class="form-group">
                                   <label >ID Petugas</label>
-                                  <input required v-model="form.custom_id" type="text" class="form-control" >
+                                  <input disabled :value="year+'88'+id" type="text" class="form-control" >
                                     <small v-if="err.custom_id !=null" class="text-danger">Id sudah dipakai</small>
                                 </div>
                                 <div class="form-group">
@@ -34,7 +34,7 @@
                                   
                                     <label for="password">Password</label>
                         <div class="d-flex">
-                        <input :type="passwordField" id="password" name="password" v-model="form.password" class="form-control" data-toggle="password">
+                        <input :type="passwordField" id="password" name="password" :value="'ardapam#'+id" disabled class="form-control" data-toggle="password">
                         <button type= "button" class="btn btn-primary btn-sm" @click="showPassword"><v-icon :name="icon"></v-icon></button>
                         </div> 
                                 </div>
@@ -93,12 +93,28 @@ export default {
         canCancel:false,
         bgc:'#BFBFBF',
         color:'#007BFF',
+        year:null,
+        id:null
         }
     },
     mounted(){
         this.getLevel()
+        this.getId()
+        this.getyear()
     },
     methods:{
+        getyear(){
+              var d = new Date();
+            var n = d.getFullYear();
+            this.year = n
+        },
+        getId(){
+             axios.get('http://localhost:8000/api/getuserid',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+                 this.id = res.data.id
+             }).catch(err=>{
+                 console.log({err})
+             })
+        },
         getLevel(){
              axios.get('http://localhost:8000/api/level',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
                  this.level = res.data
@@ -127,12 +143,15 @@ export default {
             if(this.IsLoading == true){
                 return 
             }
+            let custom_id = this.year+'88'+this.id
+            let password = 'ardapam#'+this.id
             this.isLoading = true
             axios.post('http://localhost:8000/api/register',
-            {token:this.form.token,custom_id:this.form.custom_id,name:this.form.name,password:this.form.password,level:this.form.level,telephone:this.form.telephone}, 
+            {token:this.form.token,custom_id:custom_id,name:this.form.name,password:password,level:this.form.level,telephone:this.form.telephone}, 
             {headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 console.log(res.data)
+                this.getId()
                 this.success = true
                 this.isLoading = false
                 this.form = {

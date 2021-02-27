@@ -1,6 +1,8 @@
 <template>
     <div class="container-fluid">
-                    <div class="card shadow mb-4 my-2 mx-3">
+      
+                    <chart></chart>
+                    <div class="card shadow mb-4 my-2 mt-5 mx-3">
                         <!-- Card Header - Dropdown -->
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -15,36 +17,23 @@
                                 <thead class="thead-light" style="color: black;">
                                   <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Laporan</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" class="text-center">Nama</th>
+                                    <th scope="col" class="text-center">Total Kubik</th>
+                                    <th scope="col" class="text-center">Total Bayar</th>
+                                    <th scope="col" class="text-center">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Manajer</td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</a>
+                                  <tr v-for="(data,index) in data" :key="index">
+                                    <th scope="row">{{index+=1}}</th>
+                                    <td class="text-center">{{data.user.name}}</td>
+                                    <td class="text-center">{{data.total_meter}}</td>
+                                    <td class="text-center">{{data.total_bayar}}</td>
+                                    <td class="text-center">
+                                        <router-link :to="'/admin/detail-laporan/'+data.id" @click="detail(data.id)" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
                                     </td>
                                   </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Babu</td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"></i> info</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>Asisten Manajer</td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</a>
-                                    </td>
-                                  </tr>
+                                  
                                 </tbody>
                               </table>
                             </div>
@@ -54,5 +43,30 @@
                 </div>
     
 </template>
-
-
+<script>
+import axios from 'axios'
+import chart from "../../components/Chart.vue";
+export default {
+  data(){
+    return{
+      data:[]
+    }
+  },
+  components:{
+    chart
+  },
+  mounted(){
+    this.getData()
+  },
+  methods:{
+    getData(){
+      axios.get('http://localhost:8000/api/laporan',{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+      .then(res=>{
+        this.data = res.data
+      }).catch(err=>{
+        console.log({err})
+      })
+    },
+  }
+}
+</script>

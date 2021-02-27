@@ -1,5 +1,10 @@
 <template>
     <div class="container-fluid">
+        <loading :active.sync="isLoading" 
+        :color="color"
+        :can-cancel="canCancel" 
+        :background-color="bgc"
+        :is-full-page="fullPage"></loading>
                     <div class="card shadow mb-4 my-2 mx-3">
                         <!-- Card Header - Dropdown -->
                         <div
@@ -47,33 +52,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>429</td>
-                                        <td>$202</td>
+                                    <tr v-for="(data,index) in data" :key="index">
+                                        <th scope="row">{{index+=1}}</th>
+                                        <td>{{data.user.name}}</td>
+                                        <td>{{data.total_meter}}</td>
+                                        <td>{{data.total_bayar}}</td>
                                         <td>
-                                        <a href="" class="btn btn-primary rounded-pill btn-sm">Lunas</a>
+                                        <button type="button" @click="lunas(data.id)" class="btn btn-primary rounded-pill btn-sm">Lunas</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>429</td>
-                                        <td>$202</td>
-                                        <td>
-                                        <a href="" class="btn btn-primary rounded-pill btn-sm">Lunas</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>429</td>
-                                        <td>$202</td>
-                                        <td>
-                                        <a href="" class="btn btn-primary rounded-pill btn-sm">Lunas</a>
-                                        </td>
-                                    </tr>
+                                   
                                     </tbody>
                                 </table>
                                 
@@ -95,3 +83,55 @@
                     </div>
                 </div>
 </template>
+<script>
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import axios from 'axios'
+export default {
+      components: {
+            Loading
+        },
+    data(){
+        return{
+            data:[],
+        fullPage:true,
+        canCancel:false,
+        bgc:'#BFBFBF',
+        color:'#007BFF',
+        isLoading:false,
+        }
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        getData(){
+            this.isLoading = true
+            axios.get('http://localhost:8000/api/transaction',{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.data = res.data
+                this.isLoading = false
+            }).catch(err=>{
+                this.isLoading = false
+                console.log({err})
+            })
+        },
+        lunas(id){
+            this.isLoading = true
+            axios.patch('http://localhost:8000/api/transaction/'+id,{id},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.isLoading = false
+                this.data = res.data
+                 this.$swal.fire(
+            'Success!',
+            'Your data has been processed!.',
+            'success'
+            )
+            }).catch(err=>{
+                this.isLoading = false
+                console.log({err})
+            })
+        },
+    }
+}
+</script>

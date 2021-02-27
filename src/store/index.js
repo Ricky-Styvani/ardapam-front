@@ -21,6 +21,11 @@ export default new Vuex.Store({
       state.user.data = payload.user[0]
       state.user.token = payload.token
       state.user.expired = payload.exp
+    },
+    reset(state){
+      state.user.data = null
+      state.user.token = null
+      state.user.expired = 0
     }
   },
   actions: {

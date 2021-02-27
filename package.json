@@ -10,10 +10,12 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.21.2",
+    "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
     "vue": "^2.6.11",
     "vue-awesome": "^4.1.0",
+    "vue-chartjs": "^3.5.1",
     "vue-loading-overlay": "^3.4.2",
     "vue-router": "^3.2.0",
     "vue-sweetalert2": "^4.2.0",

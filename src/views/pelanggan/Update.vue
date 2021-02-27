@@ -17,7 +17,7 @@
                             <form class="col-md-8" @submit.prevent="submit()">
                                 <div class="form-group">
                                   <label >ID Pelanggan</label>
-                                  <input required type="text" class="form-control" v-model="form.custom_id">
+                                  <input disabled type="text" class="form-control" :value="form.custom_id">
                                 </div>
                                 <div class="form-group">
                                     <label >Nama</label>
@@ -117,10 +117,10 @@ export default {
       getData(){
         axios.get('http://localhost:8000/api/showuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
       .then(res=>{
-        this.form.name = res.data[0].name
-        this.form.custom_id = res.data[0].custom_id
-        this.form.rt = res.data[0].pelanggan.rt
-        this.form.telephone = res.data[0].telephone
+        this.form.name = res.data.name
+        this.form.custom_id = res.data.custom_id
+        this.form.rt = res.data.pelanggan.rt
+        this.form.telephone = res.data.telephone
       }).catch(err=>{console.log({err})})
       },
 

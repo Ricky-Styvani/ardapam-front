@@ -4,9 +4,10 @@ import router from './router'
 import store from './store'
 
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
-import { DropdownPlugin,ModalPlugin } from 'bootstrap-vue'
+import { DropdownPlugin,ModalPlugin,ButtonPlugin } from 'bootstrap-vue'
 Vue.use(DropdownPlugin)
 Vue.use(ModalPlugin)
+Vue.use(ButtonPlugin)
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
