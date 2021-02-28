@@ -8,7 +8,7 @@
 
                             <div class="d-flex">
                                 <div class="ml-auto mr-4">
-                                    <a href=""><i class="fas fa-trash"></i></a>
+                                   <a type="button" class="text-primary" @click="hapus()"><i class="fas fa-trash"></i></a>
                                 </div>
                             </div>
                             
@@ -18,27 +18,26 @@
                             <form class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label >Nama</label>
-                                        <input type="text" class="form-control" >
+                                        <label class="font-weight-bold" >Nama</label>
+                                        <p>{{data.user.name}}</p>
                                       </div>
                                       <div class="form-group">
-                                          <label >Judul</label>
-                                          <input type="text" class="form-control" >
+                                          <label class="font-weight-bold" >Subject</label>
+                                        <p>{{data.subject}}</p>
                                       </div>
                                       <div class="form-group">
-                                          <label for="exampleFormControlTextarea1">Deskripsi</label>
-                                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                          <label class="font-weight-bold" for="exampleFormControlTextarea1">Deskripsi</label>
+                                            <p>{{data.deskripsi}}</p>
                                       </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label >Alamat</label>
-                                        <input type="text" class="form-control" >
+                                        <label class="font-weight-bold" >Alamat</label>
+                                        <p >RT. {{data.pelanggan.rt}}</p>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Gambar</label><br>
-                                        <img src="../../assets/img/undraw_profile.svg" class="img-thumbnail" style=" width: 300px;height: 240px;object-fit: contain;">
-                                    </div>
+                                        <label class="font-weight-bold" for="">Gambar</label><br>
+                                        <img :src="'http://localhost:8000/images/pengaduan/'+data.gambar" style=" max-width: 300px;max-height: 240px;object-fit: contain;">
+                                   
                                 </div>
                                 
                                 <a href="" class="btn btn-secondary btn-md mt-2 ml-3">Back</a>
@@ -48,3 +47,69 @@
                     </div>
                 </div>
 </template>
+<script>
+import axios from 'axios'
+export default {
+  data(){
+    return{
+      data:{
+          user:{
+              name:null,
+          },
+          subject:null,
+          gambar:null,
+          deskripsi:null,
+          pelanggan:{
+              rt:null
+          }
+      }
+    }
+  },
+  mounted(){
+    this.getData()
+  },
+  methods:{
+          hapus() {
+      // Use sweetalert2
+            this.$swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+       axios.delete('http://localhost:8000/api/pengaduan/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+                 console.log(res.data)
+                 this.$swal.fire(
+      'Deleted!',
+      'Your data has been deleted.',
+      'success'
+    ).then((result) => {
+  if (result.isConfirmed) {
+    this.$router.push('/admin/pengaduan')
+  }})
+
+             }).catch(err=>{
+                 console.log({err})
+                 this.$swal.fire(
+      'Failed!',
+      'Failed to delete your data',
+      'error'
+    )
+             })
+    
+  }
+})
+      },
+    getData(){
+            axios.get(`http://localhost:8000/api/pengaduan/`+this.$route.params.id,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.data = res.data
+            }).catch(err=>{console.log({err})})
+        }
+  }
+}
+</script>

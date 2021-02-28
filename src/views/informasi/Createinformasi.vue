@@ -79,7 +79,7 @@ export default {
                     this.form.gambar = e.target.result 
                 }
             }else{
-                alert('kop surat harus gambar!')
+                alert('exstensi file tidak valid!')
                 this.form.gambar = ''
 
             }
@@ -89,9 +89,8 @@ export default {
             this.failed = false
             this.success = false
             axios.post('http://localhost:8000/api/information',{gambar:this.form.gambar,judul:this.form.judul,deskripsi:this.form.deskripsi},{headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
-            .then(res=>{
+            .then(()=>{
                 this.isLoading = false
-                console.log(res)
                 this.success = true
                 this.form = {
                 judul:null,

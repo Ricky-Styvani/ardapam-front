@@ -9,53 +9,26 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            <b-button v-b-modal.modal-1 class="btn btn-danger">Lapor</b-button>
-
-                            <b-modal id="modal-1" title="Lapor">
-                              <div class="form-group">
-                                <label for="">Topik</label>
-                                <input type="text" class="form-control">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Deskripsi</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                              </div>
-                            </b-modal>
                             <div class="table-responsive">
                                 <table class="table my-2">
                                 <thead class="thead-light" style="color: black;">
                                   <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama</th>
-                                    <th scope="col">Laporan</th>
+                                    <th scope="col">Subject</th>
                                     <th scope="col">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Manajer</td>
+                                  <tr v-for="(data,index) in data" :key="index">
+                                    <th scope="row">{{index+=1}}</th>
+                                    <td>{{data.user.name}}</td>
+                                    <td>{{data.subject}}</td>
                                     <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</a>
+                                        <router-link :to="'/admin/pengaduan/'+data.id" class="btn btn-success btn-sm">Detail</router-link>
                                     </td>
                                   </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Babu</td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"></i> info</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>Asisten Manajer</td>
-                                    <td>
-                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</a>
-                                    </td>
-                                  </tr>
+                                  
                                 </tbody>
                               </table>
                             </div>
@@ -65,5 +38,24 @@
                 </div>
     
 </template>
-
-
+<script>
+import axios from 'axios'
+export default {
+  data(){
+    return{
+      data:[]
+    }
+  },
+  mounted(){
+    this.getData()
+  },
+  methods:{
+    getData(){
+            axios.get(`http://localhost:8000/api/pengaduan`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.data = res.data
+            }).catch(err=>{console.log({err})})
+        }
+  }
+}
+</script>

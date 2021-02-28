@@ -13,26 +13,26 @@
                     <chart></chart>
                     </div>
                     <div v-else>
-                        <chartpelanggan></chartpelanggan>
+                        <chartpelanggan></chartpelanggan><br>
+                        <informasi></informasi>
                         <b-button v-b-modal.modal-1 class="rounded-circle" variant="primary" style=" position: fixed; right:20px; bottom:20px;"><i class="fab fa-whatsapp fa-3x"></i></b-button>
 
-                            <b-modal id="modal-1" title="Pengaduan">
+                            <b-modal id="modal-1"  ref="modal"  title="Pengaduan" ok-title="Submit" @ok="clicksubmit">
+                            <form class="col-md-8" @submit.prevent="submit()">
                               <div class="form-group">
-                                <label for="">Nama</label>
-                                <input type="text" class="form-control">
-                              </div>
-                              <div class="form-group">
-                                <label for="">Judul</label>
-                                <input type="text" class="form-control">
+                                <label for="">Subject</label>
+                                <input v-model="form.subject" required type="text" class="form-control">
                               </div>
                               <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Deskripsi</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                <textarea v-model="form.deskripsi" required class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                               </div>
                               <div class="form-group">
-                                <label for="">Alamat</label>
-                                <input type="text" class="form-control">
+                                <label for="">Gambar</label>
+                                 <input required type="file" @change="imagehandle($event)" class="form-control-file" accept="image/*">
                               </div>
+                              <button type="submit" style="display:none" ref="submit">kirim</button>
+                            </form>
                             </b-modal>
                     </div>
                         </div>
@@ -41,13 +41,70 @@
     
 </template>
 <script>
-
+import axios from 'axios'
 import chart from "../components/Chart.vue";
 import chartpelanggan from "../components/Chartpelanggan.vue";
+import informasi from "../components/informasiPelanggan.vue";
 export default {
     components:{
         chart,
-        chartpelanggan
+        chartpelanggan,
+        informasi
     },
+    data(){
+      return{
+        form:{
+          subject:'',
+          deskripsi:'',
+          gambar:''
+        }
+      }
+    },
+ methods:{
+        clicksubmit(bvModalEvt){
+          bvModalEvt.preventDefault()
+          this.$refs.submit.click()
+        },
+        imagehandle(event){
+            let file = event.target.files[0]
+            if(file.type=='image/jpeg' || file.type=='image/jpg'|| file.type=='image/png'){
+                let fileReader = new FileReader()
+                fileReader.readAsDataURL(file)
+                fileReader.onload = (e) =>{
+                    this.form.gambar = e.target.result 
+                }
+            }else{
+                alert('gambar tidak valid!')
+                this.form.gambar = ''
+
+            }
+        },
+        submit(){
+            this.isLoading = true
+            this.failed = false
+            this.success = false
+            axios.post('http://localhost:8000/api/pengaduan',{user_id:this.$store.state.user.data.id,gambar:this.form.gambar,subject:this.form.subject,deskripsi:this.form.deskripsi},{headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
+            .then(()=>{
+                this.form = {
+                subject:null,
+                deskripsi:null,
+                gambar:null
+            }
+            this.$refs["modal"].hide();
+            this.$swal.fire(
+      'Terkirim!',
+      'Pengaduan anda telah kami terima.',
+      'success'
+    )
+            }).catch(err=>{
+                console.log({err})
+                this.$swal.fire(
+      'Failed!',
+      'Pengaduan gagal dikirm, mohon coba lagi nanti.',
+      'error'
+    )
+            })
+        }
+    }
 }
 </script>

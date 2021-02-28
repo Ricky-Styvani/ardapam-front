@@ -150,7 +150,7 @@ const routes = [
       },
    
       {
-        path: 'pengaduanpelanggan',
+        path: 'pengaduan',
         name: 'PeangaduanPelanggan',
         component: PengaduanPelanggan
       },
@@ -209,7 +209,7 @@ const routes = [
         component: CreateKaryawan
       },
       {
-        path: 'detailpengaduan',
+        path: 'pengaduan/:id',
         name: 'Detailpengaduan',
         component: DetailPengaduan
       },
