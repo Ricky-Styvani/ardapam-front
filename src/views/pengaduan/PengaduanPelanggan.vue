@@ -48,12 +48,19 @@ export default {
   },
   mounted(){
     this.getData()
+    this.updateData()
   },
   methods:{
     getData(){
             axios.get(`http://localhost:8000/api/pengaduan`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.data = res.data
+            }).catch(err=>{console.log({err})})
+        },
+        updateData(){
+             axios.get(`http://localhost:8000/api/notif-read`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(()=>{
+                this.$store.commit('notif',0)
             }).catch(err=>{console.log({err})})
         }
   }

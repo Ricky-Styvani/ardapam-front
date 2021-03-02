@@ -14,6 +14,9 @@ export default new Vuex.Store({
       data:null,
       token: null,
       expired:0
+    },
+    notif:{
+      count:0
     }
   },
   mutations: {
@@ -26,6 +29,9 @@ export default new Vuex.Store({
       state.user.data = null
       state.user.token = null
       state.user.expired = 0
+    },
+    notif(state,payload){
+      state.notif.count = payload
     }
   },
   actions: {

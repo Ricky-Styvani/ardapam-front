@@ -32,7 +32,6 @@
                 this.kubik = []
                 this.pendapatan = []
                 for(var data in this.data){
-                    // this.date.push({month:this.data[data].month,year:this.data[data].year})
                     this.date.push(this.data[data].month+'/'+this.data[data].year)
                     this.kubik.push(this.data[data].kubik)
                     this.pendapatan.push(this.data[data].pendapatan)

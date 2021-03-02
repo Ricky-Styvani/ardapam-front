@@ -127,7 +127,8 @@ export default {
         kirim(id){
             this.isLoading = true
             axios.post('http://localhost:8000/api/catat/'+id,{meter_awal:this.form.meter_awal[id],meter_akhir:this.form.meter_akhir[id]},{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
-        .then(()=>{
+        .then((res)=>{
+            console.log(res.data)
             this.isLoading = false
             this.getdata()
         this.$swal.fire(

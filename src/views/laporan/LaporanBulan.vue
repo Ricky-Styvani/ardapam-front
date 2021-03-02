@@ -1,12 +1,10 @@
 <template>
     <div class="container-fluid">
-      
-                    <chart></chart>
                     <div class="card shadow mb-4 my-2 mt-5 mx-3">
                         <!-- Card Header - Dropdown -->
                         <div
                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Laporan Pelanggan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Laporan Perbulan</h6>
                             
                         </div>
                         <!-- Card Body -->
@@ -17,20 +15,20 @@
                                 <thead class="thead-light" style="color: black;">
                                   <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col" class="text-center">Bulan</th>
+                                    <th scope="col" class="text-center">Nama</th>
                                     <th scope="col" class="text-center">Total Kubik</th>
-                                    <th scope="col" class="text-center">Total Pendapatan</th>
+                                    <th scope="col" class="text-center">Total Bayar</th>
                                     <th scope="col" class="text-center">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr v-for="(data,index) in data" :key="index">
                                     <th scope="row">{{index+=1}}</th>
-                                    <td class="text-center"> {{bulan(data.month,data.year)}}</td>
-                                    <td class="text-center">{{data.kubik}}</td>
-                                    <td class="text-center">{{data.pendapatan}}</td>
+                                    <td class="text-center">{{data.user.name}}</td>
+                                    <td class="text-center">{{data.total_meter}}</td>
+                                    <td class="text-center">{{data.total_bayar}}</td>
                                     <td class="text-center">
-                                        <router-link :to="'/admin/laporan/'+data.month+'/'+data.year" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
+                                        <router-link :to="'/admin/detail-laporan/'+data.id" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
                                     </td>
                                   </tr>
                                   
@@ -45,33 +43,25 @@
 </template>
 <script>
 import axios from 'axios'
-import chart from "../../components/Chart.vue";
 export default {
   data(){
     return{
-      data:{}
+      data:[]
     }
-  },
-  components:{
-    chart
   },
   mounted(){
     this.getData()
   },
   methods:{
     getData(){
-      axios.get('http://localhost:8000/api/chart',{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+      axios.post('http://localhost:8000/api/laporan-sorted',{'month':this.$route.params.month,'year':this.$route.params.year},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
       .then(res=>{
         this.data = res.data
+        // console.log(res.data)
       }).catch(err=>{
         console.log({err})
       })
     },
-        bulan(bulan,tahun){
-var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-            return months[bulan-1]+"/"+tahun
-        }
-    
   }
 }
 </script>

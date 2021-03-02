@@ -28,6 +28,7 @@ import DetailPengaduan from '../views/pengaduan/Detail.vue'
 import PengaduanPelanggan from '../views/pengaduan/PengaduanPelanggan.vue'
 
 import Laporan from '../views/laporan/Laporan.vue'
+import LaporanBulan from '../views/laporan/LaporanBulan.vue'
 import DetailLaporan from '../views/laporan/DetailLaporan.vue'
 
 import Tagihan from '../views/tagihan/Index.vue'
@@ -202,6 +203,11 @@ const routes = [
         path: 'detail-laporan/:id',
         name: 'DetailLaporan',
         component: DetailLaporan
+      },
+      {
+        path: 'laporan/:month/:year',
+        name: 'LaporanBulan',
+        component: LaporanBulan
       },
       {
         path: 'createpetugas',

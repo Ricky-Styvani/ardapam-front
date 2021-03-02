@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                <router-link to="/admin/laporan" class="btn btn-secondary pin"> Cancel</router-link>
+                                <a href="" @click.prevent="$router.go(-1)" class="btn btn-secondary pin"> Cancel</a>
                                 <a href="#" @click.prevent="print()" style="float:right;"><i class="pin fas fa-print fa-lg" style="color:black;"></i></a>
                                 </div>
                                 

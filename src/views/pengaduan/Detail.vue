@@ -40,8 +40,7 @@
                                    
                                 </div>
                                 
-                                <a href="" class="btn btn-secondary btn-md mt-2 ml-3">Back</a>
-                                <button type="submit" class="btn btn-primary btn-md mt-2 mx-2 ml-2" >Konfirmasi</button>
+                                <router-link to="/admin/pengaduan" class="btn btn-primary btn-md mt-2 ml-3">Back</router-link>
                               </form>
                         </div>
                     </div>

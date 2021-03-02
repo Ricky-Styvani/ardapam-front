@@ -19,6 +19,19 @@ Vue.use(VueSweetalert2);
 Vue.component ('v-icon',Icon);  
 Vue.config.productionTip = false
 
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'local',
+    wsHost:'localhost',
+    wsPort:6001,
+    forceTLS: false,
+    disableStats:true
+});
+
 new Vue({
   router,
   store,

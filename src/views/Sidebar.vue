@@ -36,7 +36,7 @@
             <li class="nav-item">
                  <router-link class="nav-link" to="/admin/pengaduan">
                     <i class="far fa-comment-dots"></i>
-                    <span>Pengaduan</span></router-link>
+                    <span>Pengaduan <span v-if="this.$store.state.notif.count >= 1" style=" font-size: 0.8em;" class="badge badge-pill badge-primary">{{this.$store.state.notif.count}}</span></span></router-link>
             </li>
 
             <li class="nav-item no-arrow" >
@@ -56,3 +56,22 @@
         </ul>
         <!-- End of Sidebar -->
 </template>
+<script>
+import axios from 'axios'
+export default {
+    mounted(){
+        this.getData();
+        window.Echo.channel('pengaduan').listen('notif',()=>{
+            this.getData()
+        })
+    },
+    methods:{
+         getData(){
+            axios.get(`http://localhost:8000/api/notif`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.$store.commit('notif',res.data)
+            }).catch(err=>{console.log({err})})
+        }
+    }
+}
+</script>
