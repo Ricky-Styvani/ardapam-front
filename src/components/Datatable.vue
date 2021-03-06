@@ -60,7 +60,7 @@ methods:{
         buttons:[
              {
                 "extend": "copyHtml5",
-                "text": 'copy',
+                "text": '<i class="fas fa-copy"></i> copy',
                 "titleAttr" : "Copiar",
                 "className" : "btn btn-secondary btn-sm m-1",
                 "title": "Data Pengaduan",
@@ -70,7 +70,7 @@ methods:{
             },
              {
                 "extend": "excelHtml5",
-                "text": '<i class="fas fa-file-excel-o"></i> excel',
+                "text": '<i class="fas fa-file-csv"></i> excel',
                 "titleAttr" : "exporter excel",
                 "className" : "btn btn-success btn-sm m-1",
                 "title": "Data Karyawan",
@@ -79,8 +79,18 @@ methods:{
                 },
             } ,
             {
+            "extend": "pdfHtml5",
+                text: '<i class="fas fa-file-pdf"></i> pdf',
+                "titleAttr" : "exporter pdf",
+                "className" : "btn btn-success btn-sm m-1",
+                "title": "Data Karyawan",
+            exportOptions: {
+                mcolumns: [ 0, 1, 2, 3 ]
+            }
+        },
+            {
                 "extend": "print",
-                "text": "print",
+                "text": '<i class="fas fa-print"></i> print',
                  exportOptions: {
                     columns: [ 0, 1, 2, 3 ]
                 },
