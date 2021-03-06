@@ -2,23 +2,23 @@
  <div class="table-responsive">
      <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
         <thead>
-                        <tr >
-                            <th>#</th>
-                            <th>Nama</th>
-                            <th>Subject</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list" >
-                         <tr v-for="(data,index) in data" :key="index">
-                                    <th scope="row">{{index+=1}}</th>
-                                    <td>{{data.user.name}}</td>
-                                    <td>{{data.subject}}</td>
-                                    <td>
-                                        <router-link :to="'/admin/pengaduan/'+data.id" class="btn btn-success btn-sm">Detail</router-link>
-                                    </td>
-                                  </tr>
-                    </tbody>
+            <tr >
+                <th>#</th>
+                <th>Nama</th>
+                <th>Subject</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="list" >
+                <tr v-for="(data,index) in data" :key="index">
+                    <th scope="row">{{index+=1}}</th>
+                    <td>{{data.user.name}}</td>
+                    <td>{{data.subject}}</td>
+                    <td>
+                        <router-link :to="'/admin/pengaduan/'+data.id" class="btn btn-success btn-sm">Detail</router-link>
+                    </td>
+                    </tr>
+        </tbody>
     </table>
  </div>
 </template>
@@ -52,6 +52,10 @@ methods:{
     tabla(){
           $(document).ready(function() {
          $("#my-table").DataTable({
+             dom: "<'row'<'col-12 col-sm-12 col-md-3'l><'col-md-6 mt-4 'B><'col-md-3'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 'p>>",
+
         buttons:[
              {
                 "extend": "copyHtml5",
@@ -77,7 +81,7 @@ methods:{
             "extend": "pdfHtml5",
                 text: '<i class="fas fa-file-pdf"></i> pdf',
                 "titleAttr" : "exporter pdf",
-                "className" : "btn btn-success btn-sm m-1",
+                "className" : "btn btn-danger btn-sm m-1",
                 "title": "Data Karyawan",
             exportOptions: {
                 mcolumns: [ 0, 1, 2, 3 ]
