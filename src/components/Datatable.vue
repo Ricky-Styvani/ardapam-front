@@ -52,11 +52,6 @@ methods:{
     tabla(){
           $(document).ready(function() {
          $("#my-table").DataTable({
-            "scrollY": 250,
-             dom: "<'row'<'col-md-8 offset-md-3'B>>"+ "<'row'<'col-12 col-sm-12 col-md-8'l><'col-6 col-md-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 'p>>",
-
         buttons:[
              {
                 "extend": "copyHtml5",
