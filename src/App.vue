@@ -18,4 +18,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+    .VueTables__search-field {
+        display: flex;
+    }
+    .VueTables__limit-field {
+        display: flex;
+    }
 </style>

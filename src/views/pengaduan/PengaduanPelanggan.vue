@@ -9,28 +9,11 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
+                           <app-datatable 
+                            
+                        />
                             <div class="table-responsive">
-                                <table class="table my-2">
-                                <thead class="thead-light" style="color: black;">
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr v-for="(data,index) in data" :key="index">
-                                    <th scope="row">{{index+=1}}</th>
-                                    <td>{{data.user.name}}</td>
-                                    <td>{{data.subject}}</td>
-                                    <td>
-                                        <router-link :to="'/admin/pengaduan/'+data.id" class="btn btn-success btn-sm">Detail</router-link>
-                                    </td>
-                                  </tr>
-                                  
-                                </tbody>
-                              </table>
+                         
                             </div>
                             
                         </div>
@@ -39,11 +22,17 @@
     
 </template>
 <script>
+import Datatable from '../../components/Datatable'
 import axios from 'axios'
 export default {
+    components: {
+        'app-datatable': Datatable
+    },
   data(){
     return{
-      data:[]
+      data:[],
+
+        
     }
   },
   mounted(){
@@ -51,6 +40,7 @@ export default {
     this.updateData()
   },
   methods:{
+ 
     getData(){
             axios.get(`http://localhost:8000/api/pengaduan`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
