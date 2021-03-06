@@ -26,7 +26,6 @@
 <script>
 import axios from 'axios'
 import $ from 'jquery';
-// import dt from 'datatables.net-bs4';
 require( 'datatables.net-buttons-bs4' )();
 require( 'datatables.net-buttons/js/buttons.html5.js' )();
 require( 'datatables.net-buttons/js/buttons.print.js' )();
@@ -35,7 +34,6 @@ import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 window.JSZip = jsZip
-// import Icon from 'vue-awesome/components/Icon';
 export default {
 mounted(){
     this.getData();
@@ -64,7 +62,7 @@ methods:{
                 "className" : "btn btn-secondary btn-sm m-1",
                 "title": "Data Pengaduan",
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3 ]
+                    columns: [ 0, 1, 2]
                 },
             },
              {
@@ -74,7 +72,7 @@ methods:{
                 "className" : "btn btn-success btn-sm m-1",
                 "title": "Data Karyawan",
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3 ]
+                    columns: [ 0, 1, 2]
                 },
             } ,
             {
@@ -84,14 +82,14 @@ methods:{
                 "className" : "btn btn-danger btn-sm m-1",
                 "title": "Data Karyawan",
             exportOptions: {
-                mcolumns: [ 0, 1, 2, 3 ]
+                mcolumns: [ 0, 1, 2]
             }
         },
             {
                 "extend": "print",
                 "text": '<i class="fas fa-print"></i> print',
                  exportOptions: {
-                    columns: [ 0, 1, 2, 3 ]
+                    columns: [ 0, 1, 2]
                 },
                 "className" : "btn btn-dark btn-sm m-1",
                 "title": "Data Karyawan",
@@ -135,14 +133,6 @@ methods:{
                 this.data = res.data
                 this.tabla()
             }).catch(err=>{console.log({err})})
-        // let response= await axios.get('http://127.0.0.1:8000/api/data')
-        //         if(response.status==200) {
-        //             this.data = response.data.data
-        //             this.tabla()
-        //         }
-        //         else if(response.status ==500){
-        //             console.log(response.data)
-        //         }
     }
 
 }

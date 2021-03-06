@@ -9,13 +9,7 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                           <app-datatable 
-                            
-                        />
-                            <div class="table-responsive">
-                         
-                            </div>
-                            
+                           <app-datatable />
                         </div>
                     </div>
                 </div>
@@ -30,23 +24,13 @@ export default {
     },
   data(){
     return{
-      data:[],
-
-        
     }
   },
   mounted(){
-    this.getData()
     this.updateData()
   },
   methods:{
- 
-    getData(){
-            axios.get(`http://localhost:8000/api/pengaduan`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
-            .then(res=>{
-                this.data = res.data
-            }).catch(err=>{console.log({err})})
-        },
+
         updateData(){
              axios.get(`http://localhost:8000/api/notif-read`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(()=>{
