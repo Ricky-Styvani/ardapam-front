@@ -76,8 +76,8 @@ methods:{
                 this.tabla()
             }).catch(err=>{console.log({err})})
     },
-    sortrt(data){
-        axios.get(`http://localhost:8000/api/tagihan-rt/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+    sortrt(pelanggan){
+        axios.get(`http://localhost:8000/api/tagihan-rt/${pelanggan}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
