@@ -9,59 +9,17 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            
-                            <div class="table-responsive">
-                                <table class="table my-2">
-                                <thead class="thead-light" style="color: black;">
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col" class="text-center">Nama</th>
-                                    <th scope="col" class="text-center">Total Kubik</th>
-                                    <th scope="col" class="text-center">Total Bayar</th>
-                                    <th scope="col" class="text-center">Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr v-for="(data,index) in data" :key="index">
-                                    <th scope="row">{{index+=1}}</th>
-                                    <td class="text-center">{{data.user.name}}</td>
-                                    <td class="text-center">{{data.total_meter}}</td>
-                                    <td class="text-center">{{data.total_bayar}}</td>
-                                    <td class="text-center">
-                                        <router-link :to="'/admin/detail-laporan/'+data.id" class="btn btn-success btn-sm"><i class="fas fa-info fa-xs"> </i> info</router-link>
-                                    </td>
-                                  </tr>
-                                  
-                                </tbody>
-                              </table>
-                            </div>
-                            
+                            <app-datatable/>
                         </div>
                     </div>
                 </div>
     
 </template>
 <script>
-import axios from 'axios'
+import Datatable from "../../components/admin/Datatable-laporan-bulan.vue";
 export default {
-  data(){
-    return{
-      data:[]
-    }
+  components:{
+    'app-datatable': Datatable
   },
-  mounted(){
-    this.getData()
-  },
-  methods:{
-    getData(){
-      axios.post('http://localhost:8000/api/laporan-sorted',{'month':this.$route.params.month,'year':this.$route.params.year},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
-      .then(res=>{
-        this.data = res.data
-        // console.log(res.data)
-      }).catch(err=>{
-        console.log({err})
-      })
-    },
-  }
 }
 </script>
