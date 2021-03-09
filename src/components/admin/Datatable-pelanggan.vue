@@ -1,6 +1,6 @@
 <template>
- <div class="table-responsive">
-     <div class="row">
+<div>
+      <div class="row">
             <div class="col-md-12">
                 <div class="float-right">
                     <label for="">Alamat/Rt</label>
@@ -10,6 +10,8 @@
                 </div>
             </div>
         </div>
+ <div class="table-responsive">
+   
      <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
         <thead>
                         <tr>
@@ -33,6 +35,7 @@
                     </tbody>
     </table>
  </div>
+</div>
 </template>
 
 <script>
