@@ -1,23 +1,26 @@
 <template>
- <div class="table-responsive">
-        <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <label for="">Bulan/Tahun</label>
-                    <b-dropdown variant="transparent">
-                        <b-dropdown-item href="#" v-for="data in date" @click="getbydate(data)" :key="data.index">{{data}}</b-dropdown-item>
-                    </b-dropdown>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="float-right">
-                    <label for="">Alamat/Rt</label>
-                    <b-dropdown variant="transparent">
-                        <b-dropdown-item v-for="i in 15" :key="i" href="#" @click="sortrt(i)">{{i}}</b-dropdown-item>
-                    </b-dropdown>
-                </div>
-            </div>
+<div>
+    <div class="row">
+    <div class="col-md-6">
+        <div>
+            <label for="">Bulan/Tahun</label>
+            <b-dropdown variant="transparent">
+                <b-dropdown-item href="#" v-for="data in date" @click="getbydate(data)" :key="data.index">{{data}}</b-dropdown-item>
+            </b-dropdown>
         </div>
+    </div>
+    <div class="col-md-6">
+        <div class="float-right">
+            <label for="">Alamat/Rt</label>
+            <b-dropdown variant="transparent">
+                <b-dropdown-item v-for="i in 15" :key="i" href="#" @click="sortrt(i)">{{i}}</b-dropdown-item>
+            </b-dropdown>
+        </div>
+    </div>
+
+</div>
+ <div class="table-responsive">
+
      <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
         <thead>
             <tr>
@@ -41,6 +44,7 @@
         </tbody>
     </table>
  </div>
+ </div>
 </template>
 
 <script>
@@ -63,7 +67,7 @@ mounted(){
 data(){
     return{
         
-        data :[],            
+        data :[],    
         id:this.$store.state.user.data.id,
         date:[]
     }
@@ -83,6 +87,7 @@ methods:{
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
+                this.rt   = res.nort
                 this.tabla()
             }).catch(err=>{console.log({err})})
     },
@@ -173,7 +178,13 @@ methods:{
                 this.data = res.data
                 this.tabla()
             }).catch(err=>{console.log({err})})
-    }
+    },
+    getDate(){
+         axios.get(`http://localhost:8000/api/tagihan-getDatePL/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.date = res.data
+            }).catch(err=>{console.log({err})})
+    },
 }
 }
 </script>

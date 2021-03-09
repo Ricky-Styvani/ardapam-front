@@ -1,5 +1,5 @@
 <template>
- <div class="table-responsive">
+<div>
         <div class="row">
             <div class="col-md-6">
                 <div>
@@ -18,15 +18,16 @@
                 </div>
             </div>
         </div>
+ <div class="table-responsive">
      <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
         <thead>
             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Total Meter</th>
-                            <th scope="col">Total Bayar</th>
-                            <th scope="col">Action</th>
-                        </tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Total Meter</th>
+                <th scope="col">Total Bayar</th>
+                <th scope="col">Action</th>
+            </tr>
         </thead>
         <tbody id="list" >
                 <tr v-for="(data,index) in data" :key="index">
@@ -41,6 +42,7 @@
         </tbody>
     </table>
  </div>
+</div>
 </template>
 
 <script>
