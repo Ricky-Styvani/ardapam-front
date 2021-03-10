@@ -67,7 +67,7 @@ export default {
     },
     methods:{
          getData(){
-            axios.get(`http://localhost:8000/api/notif`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.get(`${this.$store.state.host}/api/notif`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.$store.commit('notif',res.data)
             }).catch(err=>{console.log({err})})

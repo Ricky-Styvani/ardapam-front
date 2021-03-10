@@ -49,7 +49,7 @@ data(){
 
   methods:{
     getData(){
-      axios.get('http://localhost:8000/api/getKaryawan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+      axios.get(this.$store.state.host+'/api/getKaryawan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
       .then(res=>{
         this.data = res.data
         this.tabla()

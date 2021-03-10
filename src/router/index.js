@@ -45,7 +45,7 @@ import Templatepelanggan from '../components/Templatepelanggan.vue'
 Vue.use(VueRouter)
 const checktoken = (to,from,next) => {
   if(window.localStorage.getItem('token') != null){
-    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+    axios.get(store.state.host+'/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
       store.commit('user',res.data)
       if(store.state.user.data.level.level == 'admin'){
       next()
@@ -62,7 +62,7 @@ const checktoken = (to,from,next) => {
 }
 const checkpetugas = (to,from,next) => {
   if(window.localStorage.getItem('token') != null){
-    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+    axios.get(store.state.host+'/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
       store.commit('user',res.data)
       if(store.state.user.data.level.level == 'petugas'){
       next()
@@ -79,7 +79,7 @@ const checkpetugas = (to,from,next) => {
 }
 const checkpelanggan = (to,from,next) => {
   if(window.localStorage.getItem('token') != null){
-    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+    axios.get(store.state.host+'/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
       store.commit('user',res.data)
       if(store.state.user.data.level.level == 'pelanggan'){
       next()
@@ -96,7 +96,7 @@ const checkpelanggan = (to,from,next) => {
 }
 const checkrole = (to,from,next) => {
   if(window.localStorage.getItem('token') != null){
-    axios.get('http://localhost:8000/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+    axios.get(store.state.host+'/api/user',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
       store.commit('user',res.data)
       if(store.state.user.data.level.level == 'admin'){
       next('/admin')

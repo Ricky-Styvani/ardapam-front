@@ -78,7 +78,7 @@ export default {
     },
     methods:{
         getLevel(){
-             axios.get('http://localhost:8000/api/level',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+             axios.get(this.$store.state.host+'/api/level',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
                  this.levels = res.data
              }).catch(err=>{
                  console.log({err})
@@ -99,7 +99,7 @@ export default {
   confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
   if (result.isConfirmed) {
-       axios.delete('http://localhost:8000/api/deleteuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+       axios.delete(this.$store.state.host+'/api/deleteuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
                  console.log(res.data)
                  this.$swal.fire(
       'Deleted!',
@@ -124,7 +124,7 @@ export default {
       },
     
       getData(){
-        axios.get('http://localhost:8000/api/showuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+        axios.get(this.$store.state.host+'/api/showuser/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
       .then(res=>{
         this.form.name = res.data.name
         this.form.custom_id = res.data.custom_id
@@ -135,7 +135,7 @@ export default {
 
       submit(){
             this.isLoading = true
-            axios.patch('http://localhost:8000/api/updateuser/'+this.$route.params.id,
+            axios.patch(this.$store.state.host+'/api/updateuser/'+this.$route.params.id,
             {custom_id:this.form.custom_id,name:this.form.name,level_id:this.form.level,telephone:this.form.telephone}, 
             {headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
             .then(()=>{

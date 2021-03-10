@@ -71,7 +71,7 @@ data(){
 
 methods:{
     getbydate(data){
-        axios.get(`http://localhost:8000/api/tagihan-dateID/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-dateID/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
@@ -79,7 +79,7 @@ methods:{
             }).catch(err=>{console.log({err})})
     },
     sortrt(data){
-        axios.get(`http://localhost:8000/api/tagihan-rtIDT/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-rtIDT/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
@@ -168,12 +168,18 @@ methods:{
         });
         },
     getData() {
-        axios.get(`http://localhost:8000/api/tagihan-pelanggan/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-pelanggan/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.data = res.data
                 this.tabla()
             }).catch(err=>{console.log({err})})
-    }
+    },
+       getDate(){
+         axios.get(`${this.$store.state.host}/api/tagihan-getDateID/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            .then(res=>{
+                this.date = res.data
+            }).catch(err=>{console.log({err})})
+    },
 }
 }
 </script>

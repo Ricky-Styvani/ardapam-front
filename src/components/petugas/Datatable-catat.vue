@@ -85,7 +85,7 @@ export default {
         });
         },
     getbydate(data){
-        axios.get(`http://localhost:8000/api/tagihan-dateCD/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-dateCD/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.pelanggan = res.data
@@ -93,7 +93,7 @@ export default {
             }).catch(err=>{console.log({err})})
     },
         sortrt(data){
-            axios.get(`http://localhost:8000/api/tagihan-rtCD/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.get(`${this.$store.state.host}/api/tagihan-rtCD/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
                 .then(res=>{
                     $('#my-table').DataTable().destroy();
                     this.pelanggan = res.data
@@ -105,14 +105,14 @@ export default {
                 }).catch(err=>{console.log({err})})
         },
         getDate(){
-            axios.get(`http://localhost:8000/api/tagihan-getDateCD`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.get(`${this.$store.state.host}/api/tagihan-getDateCD`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
                 .then(res=>{
                     this.date = res.data
                 }).catch(err=>{console.log({err})})
         },
 
         getdata(){
-            axios.get('http://localhost:8000/api/getPelanggan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+            axios.get(this.$store.state.host+'/api/getPelanggan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
         .then(res=>{
             this.pelanggan = res.data
             this.tabla()
@@ -125,7 +125,7 @@ export default {
         },
         kirim(id){
             this.isLoading = true
-            axios.post('http://localhost:8000/api/catat/'+id,{meter_awal:this.form.meter_awal[id],meter_akhir:this.form.meter_akhir[id]},{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+            axios.post(this.$store.state.host+'/api/catat/'+id,{meter_awal:this.form.meter_awal[id],meter_akhir:this.form.meter_akhir[id]},{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
         .then((res)=>{
                 $('#my-table').DataTable().destroy();
             console.log(res.data)

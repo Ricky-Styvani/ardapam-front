@@ -27,11 +27,8 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats:true
 });
-
 new Vue({
   router,
   store,
-  // BootstrapVue,
-  // BootstrapVueIcons,
   render: h => h(App)
 }).$mount('#app')

@@ -59,7 +59,7 @@ data(){
 
   methods:{
       sortrt(data){
-            axios.post(`http://localhost:8000/api/laporan-sorted/${data}`,{'month':this.$route.params.month,'year':this.$route.params.year},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.post(`${this.$store.state.host}/api/laporan-sorted/${data}`,{'month':this.$route.params.month,'year':this.$route.params.year},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
                 .then(res=>{
                     $('#my-table').DataTable().destroy();
                     this.data = res.data
@@ -67,7 +67,7 @@ data(){
                 }).catch(err=>{console.log({err})})
         },
      getData(){
-      axios.post('http://localhost:8000/api/laporan-sorted',{'month':this.$route.params.month,'year':this.$route.params.year},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+      axios.post(this.$store.state.host+'/api/laporan-sorted',{'month':this.$route.params.month,'year':this.$route.params.year},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
       .then(res=>{
         this.data = res.data
         this.tabla()

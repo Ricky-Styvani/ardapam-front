@@ -83,7 +83,7 @@ export default {
             this.isLoading = true
             this.failed = false
             this.success = false
-            axios.post('http://localhost:8000/api/pengaduan',{user_id:this.$store.state.user.data.id,gambar:this.form.gambar,subject:this.form.subject,deskripsi:this.form.deskripsi},{headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
+            axios.post(this.$store.state.host+'/api/pengaduan',{user_id:this.$store.state.user.data.id,gambar:this.form.gambar,subject:this.form.subject,deskripsi:this.form.deskripsi},{headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
             .then(()=>{
                 this.form = {
                 subject:null,

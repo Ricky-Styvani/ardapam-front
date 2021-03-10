@@ -1,13 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import axios from 'axios'
 Vue.use(Vuex)
-//note
-//state = nyimpen data (biasane bentuk array/object)
-//mutations = gae ubah data ndek state
-//actions = anngep ae controller
-//modules = gaero, gaguna koyok e
-//getters = mirip koyok computed e vue
 export default new Vuex.Store({
   state: {
     user:{
@@ -17,7 +10,8 @@ export default new Vuex.Store({
     },
     notif:{
       count:0
-    }
+    },
+    host: 'https://aminulloh.me'
   },
   mutations: {
     user(state,payload){

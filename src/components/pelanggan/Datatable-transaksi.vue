@@ -22,7 +22,7 @@
         <thead>
             <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nama</th>
+                            <th scope="col">Bulan/tahun</th>
                             <th scope="col">Total Meter</th>
                             <th scope="col">Total Bayar</th>
                             <th scope="col">Action</th>
@@ -71,7 +71,7 @@ data(){
 
 methods:{
     getbydate(data){
-        axios.get(`http://localhost:8000/api/tagihan-dateID/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-dateID/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
@@ -79,7 +79,7 @@ methods:{
             }).catch(err=>{console.log({err})})
     },
     sortrt(data){
-        axios.get(`http://localhost:8000/api/tagihan-rtID/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-rtID/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
@@ -168,14 +168,14 @@ methods:{
         });
         },
     getData() {
-        axios.get(`http://localhost:8000/api/transaksi-pelanggan/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/transaksi-pelanggan/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.data = res.data
                 this.tabla()
             }).catch(err=>{console.log({err})})
     },
     getDate(){
-         axios.get(`http://localhost:8000/api/tagihan-getDateID/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+         axios.get(`${this.$store.state.host}/api/tagihan-getDateID/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.date = res.data
             }).catch(err=>{console.log({err})})

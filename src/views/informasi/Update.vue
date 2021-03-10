@@ -94,7 +94,7 @@ export default {
   confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
   if (result.isConfirmed) {
-       axios.delete('http://localhost:8000/api/information/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+       axios.delete(this.$store.state.host+'/api/information/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
                  console.log(res.data)
                  this.$swal.fire(
       'Deleted!',
@@ -119,7 +119,7 @@ export default {
       },
     
       getData(){
-        axios.get('http://localhost:8000/api/information/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+        axios.get(this.$store.state.host+'/api/information/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
       .then(res=>{
         this.form.judul = res.data.judul
         this.form.deskripsi = res.data.deskripsi
@@ -128,7 +128,7 @@ export default {
 
       submit(){
             this.isLoading = true
-            axios.patch('http://localhost:8000/api/information/'+this.$route.params.id,
+            axios.patch(this.$store.state.host+'/api/information/'+this.$route.params.id,
             {judul:this.form.judul,deskripsi:this.form.deskripsi,gambar:this.form.gambar}, 
             {headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
             .then(()=>{

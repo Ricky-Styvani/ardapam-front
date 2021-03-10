@@ -32,7 +32,7 @@ export default {
   methods:{
 
         updateData(){
-             axios.get(`http://localhost:8000/api/notif-read`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+             axios.get(`${this.$store.state.host}/api/notif-read`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(()=>{
                 this.$store.commit('notif',0)
             }).catch(err=>{console.log({err})})

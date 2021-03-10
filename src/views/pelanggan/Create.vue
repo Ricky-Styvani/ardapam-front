@@ -128,7 +128,7 @@ export default {
             this.year = n
         },
         getId(){
-             axios.get('http://localhost:8000/api/getuserid',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+             axios.get(this.$store.state.host+'/api/getuserid',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
                  this.id = res.data.id
              }).catch(err=>{
                  console.log({err})
@@ -159,7 +159,7 @@ export default {
             this.isLoading = true
             let custom_id = this.year+'88'+this.id
             let password = 'Ardapam#'+this.id
-            axios.post('http://localhost:8000/api/register',
+            axios.post(this.$store.state.host+'/api/register',
             {token:this.form.token,custom_id:custom_id,name:this.form.name,password:password,rt:this.form.rt,telephone:this.form.telephone}, 
             {headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{

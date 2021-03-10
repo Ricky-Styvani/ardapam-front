@@ -36,7 +36,7 @@
                                         <p >RT. {{data.pelanggan.rt}}</p>
                                     </div>
                                         <label class="font-weight-bold" for="">Gambar</label><br>
-                                        <img :src="'http://localhost:8000/images/pengaduan/'+data.gambar" style=" max-width: 300px;max-height: 240px;object-fit: contain;">
+                                        <img :src="this.$store.state.host+'/images/pengaduan/'+data.gambar" style=" max-width: 300px;max-height: 240px;object-fit: contain;">
                                    
                                 </div>
                                 
@@ -80,7 +80,7 @@ export default {
   confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
   if (result.isConfirmed) {
-       axios.delete('http://localhost:8000/api/pengaduan/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+       axios.delete(this.$store.state.host+'/api/pengaduan/'+this.$route.params.id,{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
                  console.log(res.data)
                  this.$swal.fire(
       'Deleted!',
@@ -104,7 +104,7 @@ export default {
 })
       },
     getData(){
-            axios.get(`http://localhost:8000/api/pengaduan/`+this.$route.params.id,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.get(`${this.$store.state.host}/api/pengaduan/`+this.$route.params.id,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.data = res.data
             }).catch(err=>{console.log({err})})

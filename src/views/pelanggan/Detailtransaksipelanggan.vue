@@ -138,7 +138,7 @@ WinPrint.print();
 WinPrint.close();
         },
         getData(){
-            axios.get('http://localhost:8000/api/transaction/'+this.$route.params.id,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.get(this.$store.state.host+'/api/transaction/'+this.$route.params.id,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.data = res.data
             }).catch(err=>{

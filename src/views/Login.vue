@@ -78,7 +78,7 @@ export default {
         login(){
             this.error = 0
             this.isLoading = true
-            axios.post('http://localhost:8000/api/login',{custom_id:this.name,password:this.password})
+            axios.post(this.$store.state.host+'/api/login',{custom_id:this.name,password:this.password})
             .then(res=>{
                 window.localStorage.setItem('token',res.data.token)
                 this.$store.commit('user',res.data)
@@ -93,8 +93,8 @@ export default {
       }
             }).catch(err=>{
                 this.isLoading = false
-                this.error = err.response.status
                 console.log({err})
+                this.error = err.response.status
             })
         },
     }

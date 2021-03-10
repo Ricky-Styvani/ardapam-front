@@ -69,7 +69,7 @@ data(){
 
 methods:{
     getbydate(data){
-        axios.get(`http://localhost:8000/api/tagihan-date/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-date/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
@@ -77,7 +77,7 @@ methods:{
             }).catch(err=>{console.log({err})})
     },
     sortrt(pelanggan){
-        axios.get(`http://localhost:8000/api/tagihan-rt/${pelanggan}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/tagihan-rt/${pelanggan}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 $('#my-table').DataTable().destroy();
                 this.data = res.data
@@ -85,7 +85,7 @@ methods:{
             }).catch(err=>{console.log({err})})
     },
     getDate(){
-         axios.get(`http://localhost:8000/api/tagihan-getDate`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+         axios.get(`${this.$store.state.host}/api/tagihan-getDate`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.date = res.data
             }).catch(err=>{console.log({err})})
@@ -171,7 +171,7 @@ methods:{
         });
         },
     getData() {
-        axios.get(`http://localhost:8000/api/transaction`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+        axios.get(`${this.$store.state.host}/api/transaction`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.data = res.data
                 this.tabla()
@@ -179,7 +179,7 @@ methods:{
     },
     lunas(id){
             this.isLoading = true
-            axios.patch('http://localhost:8000/api/transaction/'+id,{id},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.patch(this.$store.state.host+'/api/transaction/'+id,{id},{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.isLoading = false
                 this.data = res.data

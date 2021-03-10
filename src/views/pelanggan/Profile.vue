@@ -53,7 +53,7 @@ export default {
     },
     methods:{
         getData(){
-            axios.get(`http://localhost:8000/api/showuser/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.get(`${this.$store.state.host}/api/showuser/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.form.name = res.data.name
                 this.form.telephone = res.data.telephone
@@ -66,7 +66,7 @@ export default {
             }else{
                 data = {telephone:this.form.telephone,password:this.form.password}
             }
-            axios.patch(`http://localhost:8000/api/updateuser/${this.id}`,data,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.patch(`${this.$store.state.host}/api/updateuser/${this.id}`,data,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(()=>{
                 this.$swal.fire(
             'Success!',

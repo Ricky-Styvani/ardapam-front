@@ -19,7 +19,7 @@
         },
         methods:{
         getChart(){
-      axios.get('http://localhost:8000/api/chart',{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+      axios.get(this.$store.state.host+'/api/chart',{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
       .then(res=>{
         this.data = res.data
         this.setData()

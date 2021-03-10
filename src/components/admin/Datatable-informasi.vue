@@ -15,7 +15,7 @@
                             <th scope="row">{{index+=1}}</th>
                             <td>{{data.judul}}</td>
                             <td style="max-width:30vw;word-wrap: break-word;">{{data.deskripsi}}</td>
-                            <td><img style="max-width:100px; max-height:100px;" :src="'http://localhost:8000/images/informasi/'+data.gambar" alt=""></td>
+                            <td><img style="max-width:100px; max-height:100px;" :src="host+'/images/informasi/'+data.gambar" alt=""></td>
                             <td>
                                 <router-link :to="'/admin/updateinformasi/'+data.id" class="btn btn-primary btn-sm mx-1"><i class="fas fa-edit"></i></router-link>
                                 <!-- <a @click.prevent="deleteData(data.id)" class="btn btn-danger btn-sm mx-1"><i class="fas fa-trash"></i></a> -->
@@ -44,13 +44,14 @@ mounted(){
    name: "Table",
 data(){
     return{
-        data :[]
+        data :[],
+        host:this.$store.state.host
     }
 },
 
   methods:{
      getData(){
-       axios.get('http://localhost:8000/api/information',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
+       axios.get(this.$store.state.host+'/api/information',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} }).then(res=>{
         this.data = res.data.data
         this.tabla()
       }).catch(err=>{console.log({err})})

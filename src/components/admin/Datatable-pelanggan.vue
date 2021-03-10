@@ -59,7 +59,7 @@ data(){
 
   methods:{
       sortrt(data){
-            axios.get(`http://localhost:8000/api/getPelanggan/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+            axios.get(`${this.$store.state.host}/api/getPelanggan/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
                 .then(res=>{
                     $('#my-table').DataTable().destroy();
                     this.data = res.data
@@ -67,7 +67,7 @@ data(){
                 }).catch(err=>{console.log({err})})
         },
      getData(){
-      axios.get('http://localhost:8000/api/getPelanggan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
+      axios.get(this.$store.state.host+'/api/getPelanggan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
       .then(res=>{
         this.data = res.data
         this.tabla()
