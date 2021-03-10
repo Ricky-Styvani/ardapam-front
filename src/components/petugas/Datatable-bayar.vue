@@ -1,23 +1,25 @@
 <template>
+<div>
+    <div class="row">
+    <div class="col-md-6">
+        <div>
+            <label for="">Bulan/Tahun</label>
+            <b-dropdown variant="transparent">
+                <b-dropdown-item href="#" v-for="data in date" @click="getbydate(data)" :key="data.index">{{data}}</b-dropdown-item>
+            </b-dropdown>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="float-right">
+            <label for="">Alamat/Rt</label>
+            <b-dropdown variant="transparent">
+                <b-dropdown-item v-for="i in 15" :key="i" href="#" @click="sortrt(i)">{{i}}</b-dropdown-item>
+            </b-dropdown>
+        </div>
+    </div>
+</div>
  <div class="table-responsive">
-        <div class="row">
-                                <div class="col-md-6">
-                                    <div>
-                                        <label for="">Bulan/Tahun</label>
-                                        <b-dropdown variant="transparent">
-                                            <b-dropdown-item href="#" v-for="data in date" @click="getbydate(data)" :key="data.index">{{data}}</b-dropdown-item>
-                                        </b-dropdown>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="float-right">
-                                        <label for="">Alamat/Rt</label>
-                                        <b-dropdown variant="transparent">
-                                            <b-dropdown-item v-for="i in 15" :key="i" href="#" @click="sortrt(i)">{{i}}</b-dropdown-item>
-                                        </b-dropdown>
-                                    </div>
-                                </div>
-                            </div>
+
      <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
         <thead>
                         <tr>
@@ -41,6 +43,7 @@
                     </tbody>
     </table>
  </div>
+</div>
 </template>
 
 <script>

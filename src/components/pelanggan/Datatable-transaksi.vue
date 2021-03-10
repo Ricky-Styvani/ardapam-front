@@ -1,5 +1,5 @@
 <template>
- <div class="table-responsive">
+<div>
         <div class="row">
             <div class="col-md-6">
                 <div>
@@ -18,6 +18,7 @@
                 </div>
             </div>
         </div>
+ <div class="table-responsive">
      <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
         <thead>
             <tr>
@@ -41,6 +42,7 @@
         </tbody>
     </table>
  </div>
+</div>
 </template>
 
 <script>
