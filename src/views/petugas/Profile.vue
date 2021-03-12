@@ -19,10 +19,15 @@
                                     <input type="text" class="form-control" v-model="form.telephone">
                                 </div>
                                 <div class="form-group">
-                                    <label >Password</label>
-                                    <input type="password" v-model="form.password" class="form-control" >
+                                  
+                                    <label for="password">Password</label>
+                        <div class="d-flex">
+                        <input :type="passwordField" id="password" name="password" v-model="form.password" class="form-control" data-toggle="password">
+                        <button type= "button" class="btn btn-primary btn-sm" @click="showPassword"><v-icon :name="icon"></v-icon></button>
+                        </div> 
                                     <small>jika password tidak diisi, maka password tidak akan di ubah</small>
                                 </div>
+                              
                                 <div class="d-flex">
                                     <div class="ml-auto">
                                         <a href="" class="btn btn-secondary btn-md mt-2">Back</a>
@@ -45,6 +50,8 @@ export default {
                 telephone:null,
                 password:null
             },
+        passwordField: 'password',
+        icon: 'eye-slash',
             id:this.$store.state.user.data.id
         }
     },
@@ -52,6 +59,18 @@ export default {
         this.getData()
     },
     methods:{
+        showPassword() {
+            
+            if(this.passwordField == 'password') {
+                this.passwordField = 'text'
+                this.icon = 'eye'
+            } else {
+                this.passwordField = 'password'
+                this.icon = 'eye-slash'
+            }
+            
+            
+        },
         getData(){
             axios.get(`${this.$store.state.host}/api/showuser/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{

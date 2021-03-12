@@ -35,7 +35,6 @@ import Tagihan from '../views/tagihan/Index.vue'
 
 import Catat from '../views/petugas/Catat.vue'
 import Profilepetugas from '../views/petugas/Profile.vue'
-// import Petugas from '../views/petugas/Index.vue'
 import Bayar from '../views/petugas/Bayar.vue'
 
 import Template from '../components/Template.vue'

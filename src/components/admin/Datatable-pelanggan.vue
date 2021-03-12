@@ -59,7 +59,6 @@ data(){
         data :[]
     }
 },
-
   methods:{
       sortrt(data){
             axios.get(`${this.$store.state.host}/api/getPelanggan/${data}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
@@ -82,7 +81,6 @@ data(){
              dom: "<'row'<'col-12 col-sm-12 col-md-3'l><'col-md-6 mt-4 'B><'col-md-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 'p>>",
-
         buttons:[
              {
                 "extend": "copyHtml5",
@@ -133,14 +131,11 @@ data(){
                         );
                      $(win.document.body).find( '#fluid' )
                         .css( 'border-bottom','1px');
-
                     $(win.document.body).find( '#logo' )
                         .css( 'font-weight', 'bold');
-
                     $(win.document.body).find( 'h1' )
                          .addClass( 'mt-3' )
                          .css( 'text-align', 'center');
-
                     $(win.document.body).find( 'table' )
                          .addClass( 'border border-dark' )
                          .removeClass('table-borderless table-striped table-hover datatable')
@@ -156,12 +151,6 @@ data(){
          });
         });
         },
-
-
 }
 }
 </script>
-
-<style>
-
-</style>

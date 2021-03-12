@@ -11,7 +11,7 @@ export default new Vuex.Store({
     notif:{
       count:0
     },
-    host: 'https://aminulloh.me'
+    host: 'https://l-ardapam.aminulloh.me'
   },
   mutations: {
     user(state,payload){

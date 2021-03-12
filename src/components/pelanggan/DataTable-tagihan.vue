@@ -9,14 +9,6 @@
             </b-dropdown>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="float-right">
-            <label for="">Alamat/Rt</label>
-            <b-dropdown variant="transparent">
-                <b-dropdown-item v-for="i in 15" :key="i" href="#" @click="sortrt(i)">{{i}}</b-dropdown-item>
-            </b-dropdown>
-        </div>
-    </div>
 
 </div>
  <div class="table-responsive">
@@ -25,7 +17,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Bulan/Tahun</th>
+                <th scope="col">Tanggal</th>
                 <th scope="col">Kubik</th>
                 <th scope="col">Bayar</th>
                 <th scope="col">Action</th>
@@ -34,7 +26,7 @@
         <tbody id="list" >
             <tr v-for="(data,index) in data" :key="index">
                 <th scope="row">{{index+=1}}</th>
-                <td class="text-center">{{data.user.name}}</td>
+                <td class="text-center">{{data.kode_bulan}}</td>
                 <td class="text-center">{{data.total_meter}}</td>
                 <td class="text-center">{{data.total_bayar}}</td>
                 <td class="text-center">
@@ -72,7 +64,6 @@ data(){
         date:[]
     }
 },
-
 methods:{
     getbydate(data){
         axios.get(`${this.$store.state.host}/api/tagihan-dateID/${data}/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
@@ -91,14 +82,12 @@ methods:{
                 this.tabla()
             }).catch(err=>{console.log({err})})
     },
-
     tabla(){
           $(document).ready(function() {
          $("#my-table").DataTable({
              dom: "<'row'<'col-12 col-sm-12 col-md-3'l><'col-md-6 mt-4 'B><'col-md-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 'p>>",
-
         buttons:[
              {
                 "extend": "copyHtml5",
@@ -149,14 +138,11 @@ methods:{
                         );
                      $(win.document.body).find( '#fluid' )
                         .css( 'border-bottom','1px');
-
                     $(win.document.body).find( '#logo' )
                         .css( 'font-weight', 'bold');
-
                     $(win.document.body).find( 'h1' )
                          .addClass( 'mt-3' )
                          .css( 'text-align', 'center');
-
                     $(win.document.body).find( 'table' )
                          .addClass( 'border border-dark' )
                          .removeClass('table-borderless table-striped table-hover datatable')
@@ -179,8 +165,8 @@ methods:{
                 this.tabla()
             }).catch(err=>{console.log({err})})
     },
-       getDate(){
-         axios.get(`${this.$store.state.host}/api/tagihan-getDateID/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
+    getDate(){
+         axios.get(`${this.$store.state.host}/api/tagihan-getDatePL/${this.id}`,{headers:{Authorization:`Bearer ${window.localStorage.getItem('token')}`}})
             .then(res=>{
                 this.date = res.data
             }).catch(err=>{console.log({err})})
@@ -188,7 +174,3 @@ methods:{
 }
 }
 </script>
-
-<style>
-
-</style>

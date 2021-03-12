@@ -9,6 +9,7 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
+                    
                     <div v-if="this.$store.state.user.data.level.level != 'pelanggan'">
                     <chart></chart>
                     </div>
@@ -35,6 +36,32 @@
                             </form>
                             </b-modal>
                     </div>
+                    <div v-if="this.$store.state.user.data.level.level == 'admin'" class="row">
+                      <div class="col-4">
+                      <div class="card m-3">
+                        <div class="card-body">
+                          <h5 class="card-title">Total Pelanggan</h5>
+                          <p class="card-text">{{total_pelanggan}}</p>
+                        </div>
+                        </div>
+                      </div>
+                      <div class=" col-4">
+                      <div class="card m-3">
+                        <div class="card-body">
+                          <h5 class="card-title">Total Kubik</h5>
+                          <p class="card-text">{{total_kubik}}</p>
+                        </div>
+                        </div>
+                      </div>
+                      <div class=" col-4">
+                      <div class="card m-3">
+                        <div class="card-body">
+                          <h5 class="card-title">Total pendapatan</h5>
+                          <p class="card-text">{{total_pendapatan}}</p>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -57,10 +84,31 @@ export default {
           subject:'',
           deskripsi:'',
           gambar:''
-        }
+        },
+        total_pelanggan:0,
+        total_kubik:0,
+        total_pendapatan:0
       }
     },
+    mounted(){
+      this.totalpelanggan()
+      this.pendapatankubik()
+    },
  methods:{
+   totalpelanggan(){
+     axios.get(this.$store.state.host+'/api/totalpelanggan',{headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
+            .then((res)=>{
+               this.total_pelanggan = res.data
+            })
+   },
+   pendapatankubik(){
+     axios.get(this.$store.state.host+'/api/pendapatankubik',{headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`}})
+            .then((res)=>{
+               console.log(res)
+               this.total_kubik = res.data.kubik
+               this.total_pendapatan = res.data.pendapatan
+            })
+   },
         clicksubmit(bvModalEvt){
           bvModalEvt.preventDefault()
           this.$refs.submit.click()

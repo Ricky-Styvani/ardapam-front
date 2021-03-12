@@ -80,7 +80,6 @@ export default {
              dom: "<'row'<'col-12 col-sm-12 col-md-3'l><'col-md-6 mt-4 'B><'col-md-3'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 'p>>",
-
         buttons:[
             
             
@@ -114,7 +113,6 @@ export default {
                     this.date = res.data
                 }).catch(err=>{console.log({err})})
         },
-
         getdata(){
             axios.get(this.$store.state.host+'/api/getPelanggan',{ headers:{Authorization: `Bearer ${window.localStorage.getItem('token')}`} })
         .then(res=>{
@@ -146,5 +144,4 @@ export default {
         }
     }
 }
-
 </script>
