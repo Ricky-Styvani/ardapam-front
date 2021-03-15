@@ -1,6 +1,6 @@
 <template>
   <!-- Sidebar -->
-  <ul class="navbar-nav bg-white sidebar shadow  accordion" id="side">
+  <ul class="navbar-nav bg-white sidebar shadow mt-5  accordion" id="side">
     <!-- Sidebar - Brand -->
 
     <hr class="sidebar-divider " />

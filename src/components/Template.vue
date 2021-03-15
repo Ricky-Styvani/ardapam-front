@@ -1,16 +1,19 @@
 <template>
     <main>
         <div id="wrapper">
-        <Sidebar />
+        
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
-
                 <Navbar />
-                
-              <router-view :key="$route.path"></router-view>
+                <div class="row content1">
+                  <div class="col-md-2"> <Sidebar /></div>
+                  <div class="col-lg-10">  <router-view :key="$route.path"></router-view></div>
+                </div>
+               
+            
                 
             </div>
 
@@ -31,5 +34,8 @@ export default {
 <style>
     @import'../assets/css/starter-bootstrap.css';
     @import '../assets/vendor/fontawesome-free/css/all.min.css';
+    .content1 {
+  margin-top: 50px;
+}
 
 </style>

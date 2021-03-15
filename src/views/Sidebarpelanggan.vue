@@ -1,6 +1,6 @@
 <template>
   <!-- Sidebar -->
-  <ul class="navbar-nav bg-white sidebar shadow-sw  accordion" id="accordionSidebar">
+  <ul class="navbar-nav bg-white sidebar shadow-sw mt-5  accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
       <div class="sidebar-brand-text mx-3">Company Name</div>

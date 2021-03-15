@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid mt-5">
     <loading :active.sync="isLoading" :color="color" :can-cancel="canCancel" :background-color="bgc" :is-full-page="fullPage"></loading>
     <div class="card shadow mb-4 my-2 mx-3">
       <!-- Card Header - Dropdown -->
