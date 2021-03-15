@@ -2,19 +2,18 @@
 <div>
             <div class="row">
             
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <div class="float-right">
-                    <label for="">Alamat/Rt</label>
-                    <b-dropdown variant="transparent">
+                    <b-dropdown variant="transparent" text="Alamat/Rt">
                         <b-dropdown-item v-for="i in 15" :key="i" href="#" @click="sortrt(i)">{{i}}</b-dropdown-item>
                     </b-dropdown>
                 </div>
             </div>
         </div>
 
- <div class="table-responsive">
+ <div class="table-responsive-xs">
 
-     <table id="my-table" class="table table-borderless table-striped table-hover display datatable" style="">
+     <table id="my-table" class="table table-borderless table-striped table-hover display datatable " style="">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -24,13 +23,13 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody id="list" >
+        <tbody id="list">
             <tr v-for="(data,index) in pelanggan" :key="index">
                     <th scope="row">{{index+=1}}</th>
                     <td class="text-center">{{data.name}}</td>
                     <!-- catatan, untuk mengambil data didalam table , v-modelnya di kasih index sama dengan id nya, contoh: form.awal[id] nanti di button kirim tinggal ngambil data berdasarkan id -->
-                    <td class="text-center"><input type="number" v-model="form.meter_awal[data.id]" class="btn btn-light rounded-pill"  placeholder="Masukkan awal"></td>
-                    <td class="text-center"><input type="number" v-model="form.meter_akhir[data.id]" class="btn btn-light rounded-pill"  placeholder="Masukkan akhir"></td>
+                    <td class="text-center "><input type="number" v-model="form.meter_awal[data.id]" class="btn btn-light btn-sm rounded-pill col-sm-12 "  placeholder="Masukkan awal"></td>
+                    <td class="text-center "><input type="number" v-model="form.meter_akhir[data.id]" class="btn btn-light btn-sm rounded-pill col-sm-12 "  placeholder="Masukkan akhir"></td>
                     
                     <td>
                     <button @click.prevent="kirim(data.id)" class="btn btn-success rounded-pill btn-sm">Kirim</button>
@@ -41,6 +40,18 @@
  </div>
  </div>
 </template>
+
+<style >
+
+  
+
+ @media (max-width: 428px) {
+
+ #mytable{
+     width: 70%;
+ }
+ }
+</style>
 
 <script>
 import axios from 'axios'
@@ -77,8 +88,8 @@ export default {
         tabla(){
           $(document).ready(function() {
          $("#my-table").DataTable({
-             dom: "<'row'<'col-12 col-sm-12 col-md-3'l><'col-md-6 mt-4 'B><'col-md-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
+             dom: "<'row justify-content-between'<'col-4'l> <'col-4 ml-auto 'f>>" +
+                    "<'row '<'col-sm-12 'tr>>" +
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 'p>>",
         buttons:[
             

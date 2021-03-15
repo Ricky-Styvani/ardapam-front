@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
                     <div class="card shadow mb-4 my-2 mx-3">
                         <!-- Card Header - Dropdown -->
                         <div
@@ -30,7 +30,6 @@
                               
                                 <div class="d-flex">
                                     <div class="ml-auto">
-                                        <a href="" class="btn btn-secondary btn-md mt-2">Back</a>
                                         <button type="button" @click="update()" class="btn btn-primary btn-md mt-2 ml-2" >Update</button>
                                     </div>
                                 </div>
