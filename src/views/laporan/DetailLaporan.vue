@@ -17,27 +17,27 @@
 
           <div class="col-md-8 my-4">
             <p class="ml-2">
-              <span>Nama :</span><span class="text-left"> {{ data.user.name }}</span>
+              <span>Nama : </span><span class="text-left"> {{ data.user.name }}</span>
             </p>
             <p class="ml-2">
-              <span>ID Pelanggan :</span><span class="text-left"> {{ data.user.custom_id }}</span>
+              <span>ID Pelanggan : </span><span class="text-left"> {{ data.user.custom_id }}</span>
             </p>
             <p class="ml-2">
-              <span>Alamat :</span><span class="text-left"> RT. {{ data.pelanggan.rt }}</span>
+              <span>Alamat : </span><span class="text-left"> RT. {{ data.pelanggan.rt }}</span>
             </p>
             <p class="ml-2">
-              <span>Pemakaian :</span><span class="text-left"> {{ data.meter_akhir }} (Akhir) - {{ data.meter_awal }} (awal) </span>
+              <span>Pemakaian : </span><span class="text-left"> {{ data.meter_akhir }} (Akhir) - {{ data.meter_awal }} (awal) </span>
             </p>
           </div>
           <div class="col-md-4 my-4">
             <p class="ml-2">
-              <span>Bulan/Th :</span><span class="text-left"> {{ bulantahun }}</span>
+              <span>Bulan/Th : </span><span class="text-left"> {{ bulantahun }}</span>
             </p>
             <p class="ml-2">
-              <span>ID Tagihan :</span><span class="text-left"> {{ data.id_transaksi }}</span>
+              <span>ID Tagihan : </span><span class="text-left"> {{ data.id_transaksi }}</span>
             </p>
             <p class="ml-2">
-              <span>Total :</span><span class="text-left"> {{ data.total_meter }} M3</span>
+              <span>Total Pemakaian : </span><span class="text-left"> {{ data.total_meter }} M3</span>
             </p>
           </div>
 
@@ -46,7 +46,7 @@
               <table class="table table-bordered my-2 text-center">
                 <thead class="thead-light" style="color: black;">
                   <tr>
-                    <th scope="col">Meteran</th>
+                    <th scope="col">M3</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Total Harga</th>
                   </tr>
@@ -69,9 +69,9 @@
                     <td colspan="2">Admin</td>
                     <td>Rp.{{ data.admin }}.00</td>
                   </tr>
-                  <tr>
+                  <tr class="total">
                     <td colspan="2">Total Bayar</td>
-                    <td>Rp.{{ data.total_bayar }}.00</td>
+                    <td scope="col">Rp.{{ data.total_bayar }}.00</td>
                   </tr>
                 </tbody>
               </table>
@@ -143,10 +143,10 @@ export default {
                 </head>
                 <body>
                 <div class="row text-center">
-                    <div class="col-md-5">
+                    <div class="col-md-5 ">
                     LOGO
                     </div
-                    <div class="col-md-6 justify-content-center ">
+                    <div class="col-md-6 justify-content-center fw-bold ">
                         
                             <p>ARDAPAM<br>
                             BUMDES ARTADAWA<br>
@@ -193,9 +193,15 @@ export default {
 };
 </script>
 <style scoped>
+.total {
+  font-weight: bold;
+}
 @media print {
   .pin {
     display: none !important;
+  }
+  .total {
+    font-weight: bold;
   }
 }
 </style>

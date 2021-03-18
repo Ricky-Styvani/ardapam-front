@@ -1,88 +1,65 @@
 <template>
- <!-- <nav class="navbar fixed-bottom navbar-light bg-light bg-white shadow-sm justify-content-center">
-      <div class="collapse navbar-collapse">
-          <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                  <div class="container ">
-                <v-icon name="home"  ></v-icon>
-                </div>
-                <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none ml-4 ">
-                 Dashboard</router-link>
-              </li>
-              <li class="nav-item ">
-                  <div class="container ">
-                <v-icon name="home"  ></v-icon>
-                </div>
-                <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none ml-4 ">
-                 Catat</router-link>
-              </li>
-               <li class="nav-item ">
-                  <div class="container ">
-                <v-icon name="home"  ></v-icon>
-                </div>
-                <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none ml-4 ">
-                 Bayar</router-link>
-              </li>
-              <li class="nav-item ">
-                  <div class="container ">
-                <v-icon name="home"  ></v-icon>
-                </div>
-                <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none ml-4 ">
-                 Profil</router-link>
-              </li>
-            </ul>
-        </div>
-    </nav>
-    -->
-    <nav class="navbar navbar-expand navbar-light bg-light shadow-lg fixed-bottom bg-white d-md-none d-lg-none d-xl-none " id="bottom">
-  <div class="collapse navbar-collapse "  style="text-align:center" id="navbarSupportedContent">
-    <ul class="navbar-nav nav-justified w-100">
-       <li class="nav-item ">
-                  <div class="container justify-content-center">
-                <v-icon name="home"  ></v-icon>
-                </div>
-          <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none ">Dashboard</router-link>
+  <nav class="navbar navbar-expand navbar-light bg-light shadow-lg fixed-bottom bg-white d-md-none d-lg-none d-xl-none " id="bottom">
+    <div class="collapse navbar-collapse " style="text-align:center" id="navbarSupportedContent">
+      <ul class="navbar-nav nav-justified w-100">
+        <li class="nav-item ">
+          <router-link exact to="/pelanggan/dashboard" class="nav-link">
+            <a href="#" class="text-decoration-none">
+              <div class="container justify-content-center">
+                <v-icon name="home"></v-icon>
+              </div>
+              Dashboard
+            </a>
+          </router-link>
         </li>
         <li class="nav-item ">
-                  <div class="container justify-content-center ">
-                <v-icon name="calculator"  ></v-icon>
-                </div>
-                <router-link exact  to="/catat" tag= "a" class= " text-dark text-decoration-none  ">
-                Tagihan</router-link>
-         </li>
-               <li class="nav-item ">
-                  <div class="container justify-content-center ">
-                <v-icon name="file-alt"  ></v-icon>
-                </div>
-                <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none  ">
-                Transaksi</router-link>
-          </li>
-              <li class="nav-item ">
-                  <div class="container justify-content-center ">
-                <v-icon name="user" class="mx-auto"  ></v-icon>
-                </div>
-                <router-link exact  to="" tag= "a" class= " text-dark text-decoration-none ">
-                 Profil</router-link>
-              </li>
-      
-    </ul>
+          <router-link exact to="/pelanggan/tagihan" class="nav-link">
+            <a href="#" class="text-decoration-none">
+              <div class="container justify-content-center">
+                <v-icon name="calculator"></v-icon>
+              </div>
+              Tagihan
+            </a>
+          </router-link>
+        </li>
+        <li class="nav-item ">
+          <router-link exact to="/pelanggan/transaksi" class="nav-link">
+            <a href="#" class="text-decoration-none">
+              <div class="container justify-content-center">
+                <v-icon name="file-alt"></v-icon>
+              </div>
+              Transaksi
+            </a>
+          </router-link>
+        </li>
+        <li class="nav-item ">
+          <router-link exact to="/pelanggan/profile" class="nav-link">
+            <a href="#" class="text-decoration-none">
+              <div class="container justify-content-center">
+                <v-icon name="user"></v-icon>
+              </div>
+              Profil
+            </a>
+          </router-link>
+        </li>
+      </ul>
     </div>
-</nav>
+  </nav>
 </template>
 
 <script>
 export default {
-  Name: 'Bottom',
-}
+  Name: "Bottom",
+};
 </script>
 
 <style>
-#bottom{
+#bottom {
   display: none;
 }
 @media (max-width: 767.98px) {
-        #bottom{
-            display:block;
-        }
-    }
+  #bottom {
+    display: block;
+  }
+}
 </style>
